@@ -16,11 +16,8 @@ const nextConfig = {
       },
     ],
   },
-  // Production optimizations
-  output: 'standalone',
-  experimental: {
-    outputFileTracingRoot: undefined,
-  },
+  // Note: output: 'standalone' est retiré car incompatible avec Vercel
+  // Vercel gère automatiquement l'optimisation et le déploiement
   // Security headers
   async headers() {
     return [

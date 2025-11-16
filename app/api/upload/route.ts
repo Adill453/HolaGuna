@@ -9,9 +9,17 @@ interface CloudStorageProvider {
   delete(fileUrl: string): Promise<boolean>
 }
 
-// Local file storage (for development)
+// Local file storage (for development only - NOT compatible with Vercel serverless)
+// En production sur Vercel, utilisez cloudinary ou s3
 class LocalStorageProvider implements CloudStorageProvider {
   async upload(file: File, fileName: string): Promise<string> {
+    // Vérification pour Vercel : le filesystem n'est pas persistant en serverless
+    if (process.env.VERCEL) {
+      throw new Error(
+        "Local storage is not supported on Vercel. Please configure CLOUDINARY or S3 storage."
+      )
+    }
+
     const uploadsDir = join(process.cwd(), "public", "uploads")
     
     try {
@@ -29,6 +37,12 @@ class LocalStorageProvider implements CloudStorageProvider {
   }
 
   async delete(fileUrl: string): Promise<boolean> {
+    // Vérification pour Vercel
+    if (process.env.VERCEL) {
+      console.warn("Local storage delete not supported on Vercel")
+      return false
+    }
+
     try {
       const fileName = fileUrl.split('/').pop()
       if (!fileName) return false
@@ -157,8 +171,23 @@ class S3Provider implements CloudStorageProvider {
 }
 
 // Storage factory
+// En production sur Vercel, STORAGE_TYPE doit être 'cloudinary' ou 's3'
+// Le storage local n'est pas compatible avec l'environnement serverless
 function getStorageProvider(): CloudStorageProvider {
   const storageType = process.env.STORAGE_TYPE || 'local'
+  
+  // Sur Vercel, forcer l'utilisation d'un storage cloud si non configuré
+  if (process.env.VERCEL && storageType === 'local') {
+    console.warn(
+      "Local storage not available on Vercel. Falling back to Cloudinary if configured."
+    )
+    if (process.env.CLOUDINARY_CLOUD_NAME) {
+      return new CloudinaryProvider()
+    }
+    throw new Error(
+      "STORAGE_TYPE must be 'cloudinary' or 's3' on Vercel. Please configure your storage provider."
+    )
+  }
   
   switch (storageType) {
     case 'cloudinary':
