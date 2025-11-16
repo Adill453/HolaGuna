@@ -7,6 +7,9 @@ import { PrismaClient } from "@prisma/client"
  * Ce pattern garantit qu'une seule instance est créée et réutilisée, évitant les erreurs
  * de connexion multiples et les problèmes de performance.
  * 
+ * En production, utilise Prisma Accelerate si PRISMA_ACCELERATE_URL est disponible
+ * pour de meilleures performances et une gestion optimale des connexions.
+ * 
  * En développement, l'instance est stockée dans globalThis pour éviter les re-créations
  * lors du hot-reload de Next.js.
  */
@@ -14,9 +17,24 @@ const globalForPrisma = globalThis as unknown as {
   prisma: PrismaClient | undefined
 }
 
+// Utiliser Prisma Accelerate en production si disponible, sinon utiliser DATABASE_URL
+const databaseUrl = process.env.PRISMA_ACCELERATE_URL || process.env.DATABASE_URL
+
+if (!databaseUrl) {
+  throw new Error(
+    "Missing DATABASE_URL or PRISMA_ACCELERATE_URL environment variable. " +
+    "Please set one of these variables in your .env file."
+  )
+}
+
 export const prisma =
   globalForPrisma.prisma ??
   new PrismaClient({
+    datasources: {
+      db: {
+        url: databaseUrl,
+      },
+    },
     log: process.env.NODE_ENV === "development" ? ["query", "error", "warn"] : ["error"],
     errorFormat: "pretty",
   })

@@ -6,8 +6,10 @@ generator client {
 }
 
 datasource db {
-  provider = "sqlite"
+  provider = "postgresql"
   url      = env("DATABASE_URL")
+  // Pour utiliser Prisma Accelerate en production, utilisez PRISMA_ACCELERATE_URL
+  // au lieu de DATABASE_URL dans votre configuration Vercel
 }
 
 model User {
