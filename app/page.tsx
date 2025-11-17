@@ -218,46 +218,53 @@ export default function HomePage() {
               {
                 title: "Kitesurfing",
                 description: "Ride the waves with power and grace",
-                image: "/kitesurfing-action-shot.jpg",
-                price: "From €120",
+                image: "/kitesurfing-3.jpg",
+                price: "From €70",
               },
               {
-                title: "Kite Buggy",
+                title: "Buggy",
                 description: "Land-based thrills on three wheels",
-                image: "/kite-buggy-on-beach.jpg",
-                price: "From €90",
+                image: "/buggy-3.jpg",
+                price: "From €80",
               },
               {
-                title: "Landboarding",
-                description: "Surf the sand with style",
-                image: "/kite-landboarding.jpg",
-                price: "From €100",
+                title: "Mountain Board",
+                description: "All-terrain kiteboarding excitement",
+                image: "/mountain board-2.jpg",
+                price: "From €80",
               },
               {
-                title: "Paddleboard",
-                description: "Peaceful exploration of the lagoon",
-                image: "/paddleboarding-in-calm-lagoon.jpg",
+                title: "Standup Paddle",
+                description: "Paddle and glide across calm waters",
+                image: "/standup paddle-1.jpg",
                 price: "From €40",
               },
             ].map((sport, index) => (
               <Card key={index} className="group hover:shadow-lg transition-shadow">
-                <div className="relative overflow-hidden rounded-t-lg">
+                <div className="relative overflow-hidden rounded-lg ">
                   <img
                     src={sport.image || "/placeholder.svg"}
                     alt={sport.title}
-                    className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                   />
                   <div className="absolute top-4 right-4">
                     <Badge variant="secondary">{sport.price}</Badge>
                   </div>
+                  <div className="absolute bottom-2 left-2 right-2 px-3 py-1 text-white backdrop-blur-xs hover:bg-black/70 rounded-2xl">
+                    <CardTitle className="flex items-center gap-2 ">
+                      <img src="/logo.png" alt="Ola Y Lagona" className="h-5 w-5" />
+                      {sport.title}
+                    </CardTitle>
+                    <CardDescription className="text-zinc-300">{sport.description}</CardDescription>
+                  </div>
                 </div>
-                <CardHeader>
+                {/* <CardHeader>
                   <CardTitle className="flex items-center gap-2">
                     <Wind className="h-5 w-5 text-primary" />
                     {sport.title}
                   </CardTitle>
                   <CardDescription>{sport.description}</CardDescription>
-                </CardHeader>
+                </CardHeader> */}
               </Card>
             ))}
           </div>
@@ -297,7 +304,7 @@ export default function HomePage() {
                 image: "/instructor-OussamaHaddach.webp",
               },
             ].map((member, index) => (
-              <Card key={index} className="text-center">
+              <Card key={index} className="text-center p-4">
                 <CardContent className="">
                   <div className="relative w-40 h-40 mx-auto mb-2">
                     <img
@@ -366,7 +373,7 @@ export default function HomePage() {
                 course: "Advanced Kitesurfing",
               },
             ].map((review, index) => (
-              <Card key={index}>
+              <Card key={index} className="p-4">
                 <CardHeader>
                   <div className="flex items-center gap-4">
                     <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center">
