@@ -57,7 +57,7 @@ export default function HomePage() {
     }
   }
 
-  const fallbackImage = "/kitesurfing-in-dakhla.jpg"
+  const fallbackImage = "/kitesurfing-1.jpg"
 
   return (
     <div className="min-h-screen bg-background">
@@ -90,7 +90,7 @@ export default function HomePage() {
                 </>
               ) : (
                 <img
-                  src="/kitesurfing-1.jpg"
+                  src={fallbackImage}
                   alt=""
                   className="w-full h-full object-cover scale-110 blur-md brightness-75"
                   aria-hidden="true"
@@ -240,7 +240,7 @@ export default function HomePage() {
                 price: "From €40",
               },
             ].map((sport, index) => (
-              <Card key={index} className="group hover:shadow-lg transition-shadow">
+              <div className="group hover:shadow-lg transition-shadow">
                 <div className="relative overflow-hidden rounded-lg ">
                   <img
                     src={sport.image || "/placeholder.svg"}
@@ -265,7 +265,7 @@ export default function HomePage() {
                   </CardTitle>
                   <CardDescription>{sport.description}</CardDescription>
                 </CardHeader> */}
-              </Card>
+              </div>
             ))}
           </div>
 
@@ -304,7 +304,7 @@ export default function HomePage() {
                 image: "/instructor-OussamaHaddach.webp",
               },
             ].map((member, index) => (
-              <Card key={index} className="text-center p-4">
+              <Card key={index} className="text-center">
                 <CardContent className="">
                   <div className="relative w-40 h-40 mx-auto mb-2">
                     <img
@@ -373,7 +373,7 @@ export default function HomePage() {
                 course: "Advanced Kitesurfing",
               },
             ].map((review, index) => (
-              <Card key={index} className="p-4">
+              <Card key={index}>
                 <CardHeader>
                   <div className="flex items-center gap-4">
                     <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center">

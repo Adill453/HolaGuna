@@ -74,14 +74,14 @@ export default function ActivitiesPage() {
       </section>
 
       {/* Activities Grid */}
-      <section className="py-16">
+      <section className="py-4">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {loading ? (
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
               {[...Array(6)].map((_, index) => (
                 <Card key={index}>
                   <div className="relative">
-                    <Skeleton className="w-full h-48 rounded-t-lg" />
+                    <Skeleton className="w-full h-48 rounded-lg" />
                   </div>
                   <CardHeader>
                     <Skeleton className="h-6 w-3/4" />
@@ -117,7 +117,7 @@ export default function ActivitiesPage() {
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
               {activities.map((activity) => (
                 <Card key={activity.id} className="group hover:shadow-lg transition-shadow">
-                  <div className="relative overflow-hidden rounded-t-lg">
+                  <div className="relative overflow-hidden rounded-lg">
                     <img
                       src={activity.imageUrl || "/placeholder.svg?height=300&width=400"}
                       alt={activity.name}

@@ -63,14 +63,14 @@ export default function CoursesPage() {
       </section>
 
       {/* Courses Grid */}
-      <section className="py-16">
+      <section className="py-4">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {loading ? (
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
               {[...Array(6)].map((_, index) => (
                 <Card key={index}>
                   <div className="relative">
-                    <Skeleton className="w-full h-48 rounded-t-lg" />
+                    <Skeleton className="w-full h-48 rounded-lg" />
                   </div>
                   <CardHeader>
                     <Skeleton className="h-6 w-3/4" />
@@ -106,7 +106,7 @@ export default function CoursesPage() {
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
               {courses.map((course) => (
                 <Card key={course.id} className="group hover:shadow-lg transition-shadow">
-                  <div className="relative overflow-hidden rounded-t-lg">
+                  <div className="relative overflow-hidden rounded-lg">
                     <img
                       src={course.imageUrl || "/placeholder.svg?height=300&width=400"}
                       alt={course.name}
