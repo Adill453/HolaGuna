@@ -9,6 +9,7 @@ import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Checkbox } from "@/components/ui/checkbox"
 import { Badge } from "@/components/ui/badge"
+import { AspectRatio } from "@/components/ui/aspect-ratio"
 import {
   Select,
   SelectContent,
@@ -26,7 +27,7 @@ import {
 } from "@/components/ui/dialog"
 import { Skeleton } from "@/components/ui/skeleton"
 import { useToast } from "@/hooks/use-toast"
-import { Activity, Plus, Edit, Trash2, Clock, Package, Eye, ToggleLeft, ToggleRight, Search, Filter, Download, Calendar, Euro, CheckCircle, XCircle, Upload, X } from "lucide-react"
+import { Activity, Plus, Edit, Trash2, Clock, Package, Eye, ToggleLeft, ToggleRight, Search, Filter, Download, Calendar, Euro, CheckCircle, XCircle, Image as ImageIcon } from "lucide-react"
 
 interface ActivityType {
   id: number
@@ -42,6 +43,12 @@ interface ActivityType {
   _count?: {
     bookings: number
   }
+}
+
+interface GalleryImage {
+  id: number
+  title: string
+  imageUrl: string
 }
 
 export default function AdminActivitiesPage() {
@@ -65,54 +72,14 @@ export default function AdminActivitiesPage() {
     image_url: "",
     is_active: true,
   })
-  const [selectedFile, setSelectedFile] = useState<File | null>(null)
   const [imagePreview, setImagePreview] = useState<string | null>(null)
-  const [isUploading, setIsUploading] = useState(false)
+  const [galleryImages, setGalleryImages] = useState<GalleryImage[]>([])
+  const [isSaving, setIsSaving] = useState(false)
 
   useEffect(() => {
     fetchActivities()
+    fetchGalleryImages()
   }, [])
-
-  const handleFileSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0]
-    if (file) {
-      // Validate file type
-      const allowedTypes = ["image/jpeg", "image/jpg", "image/png", "image/webp"]
-      if (!allowedTypes.includes(file.type)) {
-        toast({
-          title: "Invalid file type",
-          description: "Please select a JPEG, PNG, or WebP image file.",
-          variant: "destructive",
-        })
-        return
-      }
-
-      // Validate file size (max 10MB)
-      const maxSize = 10 * 1024 * 1024 // 10MB
-      if (file.size > maxSize) {
-        toast({
-          title: "File too large",
-          description: "Please select an image smaller than 10MB.",
-          variant: "destructive",
-        })
-        return
-      }
-
-      setSelectedFile(file)
-      
-      // Create preview URL
-      const previewUrl = URL.createObjectURL(file)
-      setImagePreview(previewUrl)
-    }
-  }
-
-  const removeSelectedFile = () => {
-    if (imagePreview) {
-      URL.revokeObjectURL(imagePreview)
-    }
-    setSelectedFile(null)
-    setImagePreview(null)
-  }
 
   const fetchActivities = async () => {
     try {
@@ -132,83 +99,40 @@ export default function AdminActivitiesPage() {
     }
   }
 
+  const fetchGalleryImages = async () => {
+    try {
+      const response = await fetch("/api/admin/gallery")
+      if (response.ok) {
+        const data = await response.json()
+        setGalleryImages(data.gallery || [])
+      }
+    } catch (error) {
+      toast({
+        title: "Erreur",
+        description: "Impossible de charger les images de la galerie",
+        variant: "destructive",
+      })
+    }
+  }
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
 
-    // If editing and no new file selected, use existing image URL
-    if (editingActivity && !selectedFile) {
-      try {
-        const activityData = {
-          ...formData,
-          price: Number.parseFloat(formData.price),
-          duration_hours: Number.parseInt(formData.duration_hours),
-        }
-
-        const url = `/api/admin/activities/${editingActivity.id}`
-        const response = await fetch(url, {
-          method: "PUT",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(activityData),
-        })
-
-        if (response.ok) {
-          toast({
-            title: "Succès",
-            description: "Activité modifiée avec succès",
-          })
-          fetchActivities()
-          resetForm()
-          setIsDialogOpen(false)
-        }
-      } catch (error) {
-        toast({
-          title: "Erreur",
-          description: "Impossible de modifier l'activité",
-          variant: "destructive",
-        })
-      }
-      return
-    }
-
-    // If no file is selected for new activity, show error
-    if (!editingActivity && !selectedFile) {
+    if (!formData.image_url) {
       toast({
         title: "Erreur",
-        description: "Veuillez sélectionner une image",
+        description: "Veuillez sélectionner une image de la galerie",
         variant: "destructive",
       })
       return
     }
 
-    setIsUploading(true)
-
+    setIsSaving(true)
     try {
-      let imageUrl = formData.image_url
-
-      // Upload file if selected
-      if (selectedFile) {
-        const uploadFormData = new FormData()
-        uploadFormData.append("file", selectedFile)
-
-        const uploadResponse = await fetch("/api/upload", {
-          method: "POST",
-          body: uploadFormData,
-        })
-
-        if (!uploadResponse.ok) {
-          const errorData = await uploadResponse.json()
-          throw new Error(errorData.error || "Upload failed")
-        }
-
-        const uploadData = await uploadResponse.json()
-        imageUrl = uploadData.url
-      }
-
       const activityData = {
         ...formData,
         price: Number.parseFloat(formData.price),
         duration_hours: Number.parseInt(formData.duration_hours),
-        image_url: imageUrl,
       }
 
       // Create or update activity
@@ -240,7 +164,7 @@ export default function AdminActivitiesPage() {
         variant: "destructive",
       })
     } finally {
-      setIsUploading(false)
+      setIsSaving(false)
     }
   }
 
@@ -256,7 +180,6 @@ export default function AdminActivitiesPage() {
       is_active: activity.isActive,
     })
     setImagePreview(activity.imageUrl)
-    setSelectedFile(null)
     setIsDialogOpen(true)
   }
 
@@ -356,10 +279,6 @@ export default function AdminActivitiesPage() {
       is_active: true,
     })
     setEditingActivity(null)
-    setSelectedFile(null)
-    if (imagePreview) {
-      URL.revokeObjectURL(imagePreview)
-    }
     setImagePreview(null)
   }
 
@@ -383,30 +302,6 @@ export default function AdminActivitiesPage() {
     totalRevenue: activities.reduce((sum, a) => sum + (a.price * (a._count?.bookings || 0)), 0)
   }
 
-  const exportActivities = () => {
-    const csvContent = [
-      ["ID", "Nom", "Description", "Prix", "Durée (h)", "Équipement inclus", "Statut", "Réservations", "Revenus"],
-      ...filteredActivities.map(activity => [
-        activity.id,
-        activity.name,
-        activity.description,
-        activity.price,
-        activity.durationHours,
-        activity.equipmentIncluded ? "Oui" : "Non",
-        activity.isActive ? "Actif" : "Inactif",
-        activity._count?.bookings || 0,
-        (activity.price * (activity._count?.bookings || 0)).toFixed(2)
-      ])
-    ].map(row => row.join(",")).join("\n")
-
-    const blob = new Blob([csvContent], { type: "text/csv" })
-    const url = window.URL.createObjectURL(blob)
-    const a = document.createElement("a")
-    a.href = url
-    a.download = `activites-${new Date().toISOString().split('T')[0]}.csv`
-    a.click()
-    window.URL.revokeObjectURL(url)
-  }
 
   return (
     <div className="p-4 sm:p-6 space-y-4 sm:space-y-6">
@@ -416,11 +311,6 @@ export default function AdminActivitiesPage() {
           <p className="text-muted-foreground text-sm sm:text-base">Créez et gérez les activités de sports de kite</p>
         </div>
         <div className="flex flex-col sm:flex-row gap-2">
-          <Button onClick={exportActivities} variant="outline" size="sm" className="sm:size-default">
-            <Download className="h-4 w-4 mr-2" />
-            <span className="hidden sm:inline">Exporter</span>
-            <span className="sm:hidden">Export</span>
-          </Button>
           <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
             <DialogTrigger asChild>
               <Button onClick={resetForm} size="sm" className="sm:size-default">
@@ -482,52 +372,52 @@ export default function AdminActivitiesPage() {
               </div>
               <div>
                 <label className="text-sm font-medium">
-                  {editingActivity ? "Remplacer l'image (optionnel)" : "Sélectionner une image"}
+                  {editingActivity ? "Choisir une nouvelle image" : "Image de la galerie"}
                 </label>
                 <div className="space-y-4">
-                  {imagePreview && (
-                    <div className="relative">
-                      <img
-                        src={imagePreview}
-                        alt="Preview"
-                        className="w-full h-48 object-cover rounded-lg border"
-                      />
-                      {selectedFile && (
-                        <Button
-                          type="button"
-                          variant="destructive"
-                          size="sm"
-                          className="absolute top-2 right-2"
-                          onClick={removeSelectedFile}
-                        >
-                          <X className="h-4 w-4" />
-                        </Button>
+                  <Select
+                    value={formData.image_url}
+                    onValueChange={(value) => {
+                      setFormData({ ...formData, image_url: value })
+                      setImagePreview(value)
+                    }}
+                  >
+                    <SelectTrigger>
+                      <SelectValue placeholder="Sélectionner une image de la galerie" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {galleryImages.length === 0 ? (
+                        <SelectItem value="" disabled>
+                          Aucune image disponible
+                        </SelectItem>
+                      ) : (
+                        galleryImages.map((image) => (
+                          <SelectItem key={image.id} value={image.imageUrl}>
+                            {image.title}
+                          </SelectItem>
+                        ))
                       )}
-                    </div>
-                  )}
-                  <div className="flex items-center gap-4">
-                    <Input
-                      type="file"
-                      accept="image/*"
-                      onChange={handleFileSelect}
-                      className="flex-1"
-                      id="activity-image-upload"
-                    />
-                    <Button
-                      type="button"
-                      variant="outline"
-                      onClick={() => document.getElementById("activity-image-upload")?.click()}
-                      className="flex items-center gap-2"
-                    >
-                      <Upload className="h-4 w-4" />
-                      Choisir un fichier
-                    </Button>
+                    </SelectContent>
+                  </Select>
+                  <p className="text-xs text-muted-foreground">
+                    Gérez les images dans l'onglet Galerie.
+                  </p>
+                  <div className="relative rounded-xl border border-dashed border-border/60 bg-muted/30 p-2">
+                    <AspectRatio ratio={4 / 3}>
+                      {imagePreview ? (
+                        <img
+                          src={imagePreview}
+                          alt="Preview"
+                          className="h-full w-full rounded-lg object-cover"
+                        />
+                      ) : (
+                        <div className="flex h-full w-full flex-col items-center justify-center text-xs text-muted-foreground">
+                          <ImageIcon className="h-8 w-8 text-muted-foreground/60 mb-2" />
+                          <p>Aucune image sélectionnée</p>
+                        </div>
+                      )}
+                    </AspectRatio>
                   </div>
-                  {selectedFile && (
-                    <p className="text-sm text-muted-foreground">
-                      Sélectionné: {selectedFile.name} ({(selectedFile.size / 1024 / 1024).toFixed(2)} MB)
-                    </p>
-                  )}
                 </div>
               </div>
               <div>
@@ -551,10 +441,10 @@ export default function AdminActivitiesPage() {
                 </label>
               </div>
               <div className="flex gap-2 pt-4">
-                <Button type="submit" disabled={isUploading}>
-                  {isUploading ? "Téléchargement..." : editingActivity ? "Modifier l'activité" : "Créer l'activité"}
+                <Button type="submit" disabled={isSaving}>
+                  {isSaving ? "Enregistrement..." : editingActivity ? "Modifier l'activité" : "Créer l'activité"}
                 </Button>
-                <Button type="button" variant="outline" onClick={() => setIsDialogOpen(false)} disabled={isUploading}>
+                <Button type="button" variant="outline" onClick={() => setIsDialogOpen(false)} disabled={isSaving}>
                   Annuler
                 </Button>
               </div>
@@ -792,7 +682,7 @@ export default function AdminActivitiesPage() {
                   <img 
                     src={selectedActivity.imageUrl} 
                     alt={selectedActivity.name}
-                    className="w-full h-48 object-cover rounded-lg"
+                    className="w-full h-full object-cover rounded-lg"
                   />
                 </div>
               )}

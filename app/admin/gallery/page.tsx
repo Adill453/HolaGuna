@@ -9,6 +9,7 @@ import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Checkbox } from "@/components/ui/checkbox"
+import { AspectRatio } from "@/components/ui/aspect-ratio"
 import {
   Dialog,
   DialogContent,
@@ -281,27 +282,6 @@ export default function AdminGalleryPage() {
     setImagePreview(null)
   }
 
-  const exportGallery = () => {
-    const csvContent = [
-      ["ID", "Title", "Description", "Category", "Featured", "Created"],
-      ...galleryItems.map(item => [
-        item.id,
-        item.title,
-        item.description || "",
-        item.category,
-        item.isFeatured ? "Yes" : "No",
-        new Date(item.createdAt).toLocaleDateString()
-      ])
-    ].map(row => row.join(",")).join("\n")
-
-    const blob = new Blob([csvContent], { type: "text/csv" })
-    const url = window.URL.createObjectURL(blob)
-    const a = document.createElement("a")
-    a.href = url
-    a.download = `gallery-${new Date().toISOString().split('T')[0]}.csv`
-    a.click()
-    window.URL.revokeObjectURL(url)
-  }
 
   return (
     <div className="p-4 sm:p-6 space-y-4 sm:space-y-6">
@@ -311,19 +291,8 @@ export default function AdminGalleryPage() {
           <p className="text-muted-foreground text-sm sm:text-base">Upload and manage activity photos</p>
         </div>
         <div className="flex flex-col sm:flex-row gap-2">
-          <Button onClick={exportGallery} variant="outline" size="sm" className="sm:size-default">
-            <Download className="h-4 w-4 mr-2" />
-            <span className="hidden sm:inline">Export</span>
-            <span className="sm:hidden">Export</span>
-          </Button>
           <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
-            <DialogTrigger asChild>
-              <Button onClick={resetForm} size="sm" className="sm:size-default">
-                <Plus className="h-4 w-4 mr-2" />
-                <span className="hidden sm:inline">Add Image</span>
-                <span className="sm:hidden">Add</span>
-              </Button>
-            </DialogTrigger>
+            
           <DialogContent className="max-w-2xl max-h-[90vh] mx-4 sm:mx-0 overflow-hidden flex flex-col">
             <DialogHeader className="flex-shrink-0">
               <DialogTitle>{editingItem ? "Edit Gallery Item" : "Add New Image"}</DialogTitle>
@@ -364,47 +333,37 @@ export default function AdminGalleryPage() {
               </div>
               <div>
                 <label className="text-sm font-medium">
-                  {editingItem ? "Replace Image (optional)" : "Select Image"}
+                  {editingItem ? "Image" : "Select Image"}
                 </label>
                 <div className="space-y-4">
-                  {imagePreview && (
-                    <div className="relative">
-                      <img
-                        src={imagePreview}
-                        alt="Preview"
-                        className="w-full h-32 sm:h-48 object-cover rounded-lg border"
-                      />
-                      {selectedFile && (
-                        <Button
-                          type="button"
-                          variant="destructive"
-                          size="sm"
-                          className="absolute top-2 right-2"
-                          onClick={removeSelectedFile}
-                        >
-                          <X className="h-4 w-4" />
-                        </Button>
+                  <div className="relative rounded-xl border border-dashed border-border/60 bg-muted/30 p-2">
+                    <AspectRatio ratio={4 / 3}>
+                      {imagePreview ? (
+                        <img
+                          src={imagePreview}
+                          alt="Preview"
+                          className="h-full w-full rounded-lg object-cover shadow-inner"
+                        />
+                      ) : (
+                        <div className="flex h-full w-full flex-col items-center justify-center text-xs text-muted-foreground">
+                          <Upload className="h-8 w-8 text-muted-foreground/60 mb-2" />
+                          <p>No image selected yet</p>
+                        </div>
                       )}
-                    </div>
-                  )}
-                  <div className="flex items-center gap-4">
-                    <Input
-                      type="file"
-                      accept="image/*"
-                      onChange={handleFileSelect}
-                      className="flex-1"
-                      id="image-upload"
-                    />
-                    <Button
-                      type="button"
-                      variant="outline"
-                      onClick={() => document.getElementById("image-upload")?.click()}
-                      className="flex items-center gap-2"
-                    >
-                      <Upload className="h-4 w-4" />
-                      Choose File
-                    </Button>
+                    </AspectRatio>
+                    {selectedFile && (
+                      <Button
+                        type="button"
+                        variant="destructive"
+                        size="sm"
+                        className="absolute top-4 right-4"
+                        onClick={removeSelectedFile}
+                      >
+                        <X className="h-4 w-4" />
+                      </Button>
+                    )}
                   </div>
+                  
                   {selectedFile && (
                     <p className="text-sm text-muted-foreground">
                       Selected: {selectedFile.name} ({(selectedFile.size / 1024 / 1024).toFixed(2)} MB)
