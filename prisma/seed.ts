@@ -34,7 +34,7 @@ async function main() {
         maxParticipants: 8,
         courseType: CourseType.KITESURFING,
         pricingTier: PricingTier.GROUP,
-        imageUrl: "/kitesurfing-2.jpg",
+        imageUrl: "/kitesurfing-2.webp",
       },
       {
         name: "Kitesurfing - Group - 4H",
@@ -44,7 +44,7 @@ async function main() {
         maxParticipants: 8,
         courseType: CourseType.KITESURFING,
         pricingTier: PricingTier.GROUP,
-        imageUrl: "/kitesurfing-2.jpg",
+        imageUrl: "/kitesurfing-2.webp",
       },
       {
         name: "Kitesurfing - Group - 6H",
@@ -54,7 +54,7 @@ async function main() {
         maxParticipants: 8,
         courseType: CourseType.KITESURFING,
         pricingTier: PricingTier.GROUP,
-        imageUrl: "/kitesurfing-2.jpg",
+        imageUrl: "/kitesurfing-2.webp",
       },
       {
         name: "Kitesurfing - Group - 8H",
@@ -64,7 +64,7 @@ async function main() {
         maxParticipants: 8,
         courseType: CourseType.KITESURFING,
         pricingTier: PricingTier.GROUP,
-        imageUrl: "/kitesurfing-2.jpg",
+        imageUrl: "/kitesurfing-2.webp",
       },
       {
         name: "Kitesurfing - Group - 10H",
@@ -74,7 +74,7 @@ async function main() {
         maxParticipants: 8,
         courseType: CourseType.KITESURFING,
         pricingTier: PricingTier.GROUP,
-        imageUrl: "/kitesurfing-2.jpg",
+        imageUrl: "/kitesurfing-2.webp",
       },
       {
         name: "Kitesurfing - Group - 12H",
@@ -84,7 +84,7 @@ async function main() {
         maxParticipants: 8,
         courseType: CourseType.KITESURFING,
         pricingTier: PricingTier.GROUP,
-        imageUrl: "/kitesurfing-2.jpg",
+        imageUrl: "/kitesurfing-2.webp",
       },
       {
         name: "Kitesurfing - Group - 20H",
@@ -94,7 +94,7 @@ async function main() {
         maxParticipants: 8,
         courseType: CourseType.KITESURFING,
         pricingTier: PricingTier.GROUP,
-        imageUrl: "/kitesurfing-2.jpg",
+        imageUrl: "/kitesurfing-2.webp",
       },
       // SEMI-PRIVATE pricing
       {
@@ -105,7 +105,7 @@ async function main() {
         maxParticipants: 3,
         courseType: CourseType.KITESURFING,
         pricingTier: PricingTier.SEMI_PRIVATE,
-        imageUrl: "/kitesurfing-3.jpg",
+        imageUrl: "/kitesurfing-3.webp",
       },
       {
         name: "Kitesurfing - Semi-Private - 4H",
@@ -115,7 +115,7 @@ async function main() {
         maxParticipants: 3,
         courseType: CourseType.KITESURFING,
         pricingTier: PricingTier.SEMI_PRIVATE,
-        imageUrl: "/kitesurfing-3.jpg",
+        imageUrl: "/kitesurfing-3.webp",
       },
       {
         name: "Kitesurfing - Semi-Private - 6H",
@@ -125,7 +125,7 @@ async function main() {
         maxParticipants: 3,
         courseType: CourseType.KITESURFING,
         pricingTier: PricingTier.SEMI_PRIVATE,
-        imageUrl: "/kitesurfing-3.jpg",
+        imageUrl: "/kitesurfing-3.webp",
       },
       {
         name: "Kitesurfing - Semi-Private - 8H",
@@ -135,7 +135,7 @@ async function main() {
         maxParticipants: 3,
         courseType: CourseType.KITESURFING,
         pricingTier: PricingTier.SEMI_PRIVATE,
-        imageUrl: "/kitesurfing-3.jpg",
+        imageUrl: "/kitesurfing-3.webp",
       },
       {
         name: "Kitesurfing - Semi-Private - 10H",
@@ -145,7 +145,7 @@ async function main() {
         maxParticipants: 3,
         courseType: CourseType.KITESURFING,
         pricingTier: PricingTier.SEMI_PRIVATE,
-        imageUrl: "/kitesurfing-3.jpg",
+        imageUrl: "/kitesurfing-3.webp",
       },
       {
         name: "Kitesurfing - Semi-Private - 12H",
@@ -155,7 +155,7 @@ async function main() {
         maxParticipants: 3,
         courseType: CourseType.KITESURFING,
         pricingTier: PricingTier.SEMI_PRIVATE,
-        imageUrl: "/kitesurfing-3.jpg",
+        imageUrl: "/kitesurfing-3.webp",
       },
       {
         name: "Kitesurfing - Semi-Private - Extra 2H",
@@ -165,7 +165,7 @@ async function main() {
         maxParticipants: 3,
         courseType: CourseType.KITESURFING,
         pricingTier: PricingTier.SEMI_PRIVATE,
-        imageUrl: "/kitesurfing-3.jpg",
+        imageUrl: "/kitesurfing-3.webp",
       },
       // PRIVATE pricing
       {
@@ -176,7 +176,7 @@ async function main() {
         maxParticipants: 1,
         courseType: CourseType.KITESURFING,
         pricingTier: PricingTier.PRIVATE,
-        imageUrl: "/kitesurfing-3.jpg",
+        imageUrl: "/kitesurfing-3.webp",
       },
       {
         name: "Kitesurfing - Private - 4H",
@@ -186,7 +186,7 @@ async function main() {
         maxParticipants: 1,
         courseType: CourseType.KITESURFING,
         pricingTier: PricingTier.PRIVATE,
-        imageUrl: "/kitesurfing-3.jpg",
+        imageUrl: "/kitesurfing-3.webp",
       },
       {
         name: "Kitesurfing - Private - 6H",
@@ -196,7 +196,7 @@ async function main() {
         maxParticipants: 1,
         courseType: CourseType.KITESURFING,
         pricingTier: PricingTier.PRIVATE,
-        imageUrl: "/kitesurfing-3.jpg",
+        imageUrl: "/kitesurfing-3.webp",
       },
       {
         name: "Kitesurfing - Private - 8H",
@@ -206,7 +206,7 @@ async function main() {
         maxParticipants: 1,
         courseType: CourseType.KITESURFING,
         pricingTier: PricingTier.PRIVATE,
-        imageUrl: "/kitesurfing-3.jpg",
+        imageUrl: "/kitesurfing-3.webp",
       },
       {
         name: "Kitesurfing - Private - 10H",
@@ -216,7 +216,7 @@ async function main() {
         maxParticipants: 1,
         courseType: CourseType.KITESURFING,
         pricingTier: PricingTier.PRIVATE,
-        imageUrl: "/kitesurfing-3.jpg",
+        imageUrl: "/kitesurfing-3.webp",
       },
       {
         name: "Kitesurfing - Private - 12H",
@@ -226,7 +226,7 @@ async function main() {
         maxParticipants: 1,
         courseType: CourseType.KITESURFING,
         pricingTier: PricingTier.PRIVATE,
-        imageUrl: "/kitesurfing-3.jpg",
+        imageUrl: "/kitesurfing-3.webp",
       },
       {
         name: "Kitesurfing - Private - Extra 2H",
@@ -236,7 +236,7 @@ async function main() {
         maxParticipants: 1,
         courseType: CourseType.KITESURFING,
         pricingTier: PricingTier.PRIVATE,
-        imageUrl: "/kitesurfing-3.jpg",
+        imageUrl: "/kitesurfing-3.webp",
       },
       // BUGGY courses
       {
@@ -248,7 +248,7 @@ async function main() {
         courseType: CourseType.BUGGY,
         pricingTier: null,
         minAge: 12,
-        imageUrl: "/buggy-2.jpg",
+        imageUrl: "/buggy-2.webp",
       },
       {
         name: "Kite Buggy - Beginner",
@@ -259,7 +259,7 @@ async function main() {
         courseType: CourseType.BUGGY,
         pricingTier: null,
         minAge: 12,
-        imageUrl: "/buggy-2.jpg",
+        imageUrl: "/buggy-2.webp",
       },
       // MOUNTAIN BOARD courses
       {
@@ -270,7 +270,7 @@ async function main() {
         maxParticipants: 4,
         courseType: CourseType.MOUNTAIN_BOARD,
         pricingTier: null,
-        imageUrl: "/mountain board-3.jpg",
+        imageUrl: "/mountain board-3.webp",
       },
     ],
   })
@@ -284,7 +284,7 @@ async function main() {
         price: 50.0,
         durationHours: 2,
         equipmentIncluded: true,
-        imageUrl: "/standup paddle-1.jpg",
+        imageUrl: "/standup paddle-1.webp",
       },
       {
         name: "Sunset Kitesurfing",
@@ -292,7 +292,7 @@ async function main() {
         price: 150.0,
         durationHours: 2,
         equipmentIncluded: true,
-        imageUrl: "/kitesurfing-4.jpg",
+        imageUrl: "/kitesurfing-4.webp",
       },
       {
         name: "Buggy Adventure",
@@ -300,7 +300,7 @@ async function main() {
         price: 80.0,
         durationHours: 1,
         equipmentIncluded: true,
-        imageUrl: "/buggy-4.jpg",
+        imageUrl: "/buggy-4.webp",
       },
       {
         name: "Mountain Boarding",
@@ -308,7 +308,7 @@ async function main() {
         price: 60.0,
         durationHours: 2,
         equipmentIncluded: true,
-        imageUrl: "/mountain board-3.jpg",
+        imageUrl: "/mountain board-3.webp",
       },
     ],
     //skipDuplicates: true,
@@ -320,56 +320,56 @@ async function main() {
       {
         title: "Epic Kitesurfing Session",
         description: "Amazing kitesurfing action in Dakhla lagoon",
-        imageUrl: "/kitesurfing-1.jpg",
+        imageUrl: "/kitesurfing-1.webp",
         category: "KITESURFING",
         isFeatured: true,
       },
       {
         title: "Epic Kitesurfing Session",
         description: "Amazing kitesurfing action in Dakhla lagoon",
-        imageUrl: "/kitesurfing-2.jpg",
+        imageUrl: "/kitesurfing-2.webp",
         category: "KITESURFING",
         isFeatured: false,
       },
       {
         title: "Epic Kitesurfing Session",
         description: "Amazing kitesurfing action in Dakhla lagoon",
-        imageUrl: "/kitesurfing-3.jpg",
+        imageUrl: "/kitesurfing-3.webp",
         category: "KITESURFING",
         isFeatured: false,
       },
       {
         title: "Epic Kitesurfing Session",
         description: "Amazing kitesurfing action in Dakhla lagoon",
-        imageUrl: "/kitesurfing-4.jpg",
+        imageUrl: "/kitesurfing-4.webp",
         category: "KITESURFING",
         isFeatured: true,
       },
       {
         title: "Buggy Fun",
         description: "Thrilling buggy adventure on the beach",
-        imageUrl: "/buggy-1.jpg",
+        imageUrl: "/buggy-1.webp",
         category: "BUGGY",
         isFeatured: true,
       },
       {
         title: "Buggy Fun",
         description: "Thrilling buggy adventure on the beach",
-        imageUrl: "/buggy-2.jpg",
+        imageUrl: "/buggy-2.webp",
         category: "BUGGY",
         isFeatured: false,
       },
       {
         title: "Buggy Fun",
         description: "Thrilling buggy adventure on the beach",
-        imageUrl: "/buggy-3.jpg",
+        imageUrl: "/buggy-3.webp",
         category: "BUGGY",
         isFeatured: false,
       },
       {
         title: "Buggy Fun",
         description: "Thrilling buggy adventure on the beach",
-        imageUrl: "/buggy-4.jpg",
+        imageUrl: "/buggy-4.webp",
         category: "BUGGY",
         isFeatured: true,
       },
@@ -377,28 +377,28 @@ async function main() {
       {
         title: "Mountain boarding",
         description: "Professional landboarding techniques",
-        imageUrl: "/mountain board-1.jpg",
+        imageUrl: "/mountain board-1.webp",
         category: "MOUNTAIN_BOARD",
         isFeatured: true,
       },
       {
         title: "Mountain boarding",
         description: "Professional landboarding techniques",
-        imageUrl: "/mountain board-2.jpg",
+        imageUrl: "/mountain board-2.webp",
         category: "MOUNTAIN_BOARD",
         isFeatured: false,
       },
       {
         title: "Mountain boarding",
         description: "Professional landboarding techniques",
-        imageUrl: "/mountain board-3.jpg",
+        imageUrl: "/mountain board-3.webp",
         category: "MOUNTAIN_BOARD",
         isFeatured: true,
       },
       {
         title: "Mountain boarding",
         description: "Professional landboarding techniques",
-        imageUrl: "/mountain board-4.jpg",
+        imageUrl: "/mountain board-4.webp",
         category: "MOUNTAIN_BOARD",
         isFeatured: false,
       },
@@ -406,28 +406,28 @@ async function main() {
       {
         title: "Peaceful stand up paddleboarding",
         description: "Serene paddleboard session at sunset",
-        imageUrl: "/standup paddle-1.jpg",
+        imageUrl: "/standup paddle-1.webp",
         category: "STANDUP_PADDLE",
         isFeatured: true,
       },
       {
         title: "Peaceful stand up paddleboarding",
         description: "Serene paddleboard session at sunset",
-        imageUrl: "/standup paddle-2.jpg",
+        imageUrl: "/standup paddle-2.webp",
         category: "STANDUP_PADDLE",
         isFeatured: false,
       },
       {
         title: "Peaceful stand up paddleboarding",
         description: "Serene paddleboard session at sunset",
-        imageUrl: "/standup paddle-3.jpg",
+        imageUrl: "/standup paddle-3.webp",
         category: "STANDUP_PADDLE",
         isFeatured: false,
       },
       {
         title: "Peaceful stand up paddleboarding",
         description: "Serene paddleboard session at sunset",
-        imageUrl: "/standup paddle-4.jpg",
+        imageUrl: "/standup paddle-4.webp",
         category: "STANDUP_PADDLE",
         isFeatured: false,
       },

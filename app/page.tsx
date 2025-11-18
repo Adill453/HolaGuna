@@ -57,7 +57,7 @@ export default function HomePage() {
     }
   }
 
-  const fallbackImage = "/kitesurfing-1.jpg"
+  const fallbackImage = "/kitesurfing-1.webp"
 
   return (
     <div className="min-h-screen bg-background">
@@ -218,25 +218,25 @@ export default function HomePage() {
               {
                 title: "Kitesurfing",
                 description: "Ride the waves with power and grace",
-                image: "/kitesurfing-3.jpg",
+                image: "/kitesurfing-3.webp",
                 price: "From €70",
               },
               {
                 title: "Buggy",
                 description: "Land-based thrills on three wheels",
-                image: "/buggy-3.jpg",
+                image: "/buggy-3.webp",
                 price: "From €80",
               },
               {
                 title: "Mountain Board",
                 description: "All-terrain kiteboarding excitement",
-                image: "/mountain board-2.jpg",
+                image: "/mountain board-2.webp",
                 price: "From €80",
               },
               {
                 title: "Standup Paddle",
                 description: "Paddle and glide across calm waters",
-                image: "/standup paddle-1.jpg",
+                image: "/standup paddle-1.webp",
                 price: "From €40",
               },
             ].map((sport, index) => (
@@ -401,136 +401,6 @@ export default function HomePage() {
       </section>
 
       {/* Location & Contact */}
-
-
-      {/* <section className="py-8">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <div className="space-y-6">
-              <div className="space-y-4">
-                <h2 className="text-3xl lg:text-4xl font-bold">Visit Us in Dakhla</h2>
-                <p className="text-xl text-muted-foreground">
-                  Located in Morocco's premier kite sports destination, our center offers easy access to both lagoon and
-                  ocean conditions.
-                </p>
-              </div>
-
-              <div className="space-y-4">
-                <div className="flex items-start gap-3">
-                  <MapPin className="h-5 w-5 text-primary mt-1" />
-                  <div>
-                    <h4 className="font-semibold">Location</h4>
-                    <p className="text-muted-foreground">Dakhla Lagoon, Morocco</p>
-                    <p className="text-sm text-muted-foreground">Perfect wind conditions year-round</p>
-                  </div>
-                </div>
-
-                <div className="flex items-start gap-3">
-                  <Phone className="h-5 w-5 text-primary mt-1" />
-                  <div>
-                    <h4 className="font-semibold">Phone</h4>
-                    <p className="text-muted-foreground">+212 528 93 XX XX</p>
-                  </div>
-                </div>
-
-                <div className="flex items-start gap-3">
-                  <Mail className="h-5 w-5 text-primary mt-1" />
-                  <div>
-                    <h4 className="font-semibold">Email</h4>
-                    <p className="text-muted-foreground">info@kitedakhla.com</p>
-                  </div>
-                </div>
-              </div>
-
-              <Link href="/contact">
-                <Button size="lg">Get In Touch</Button>
-              </Link>
-            </div>
-
-            <div className="relative">
-              <img src="/dakhla-lagoon-aerial-view-with-kite-spots-marked.jpg" alt="Dakhla Location" className="rounded-lg shadow-2xl w-full" />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent rounded-lg"></div>
-            </div>
-          </div>
-        </div>
-      </section> */}
-
-
-
-
-
-      {/* <section className="relative h-[90vh]  overflow-hidden py-8">
-        <video
-          autoPlay
-          loop
-          muted
-          playsInline
-          className="absolute inset-0 w-full h-full object-cover"
-        >
-          <source src="/videos/HERO VIDEO.mp4" type="video/mp4" />
-        </video>
-        <div className="absolute inset-0 bg-black/50 flex flex-col  justify-center  text-white p-6">
-
-
-          
-          <div className="absolute inset-0 flex items-end sm:items-center">
-            <div
-              className="
-            w-full max-w-[90%] sm:max-w-lg
-            px-4 sm:px-6 lg:px-8
-            pb-4 sm:py-8
-            text-white
-          "
-            >
-              <h2 className="text-2xl sm:text-3xl lg:text-5xl font-extrabold leading-tight">
-                Visit Us in <span className="text-sky-400">Dakhla</span>
-              </h2>
-
-              <p className="mt-2 sm:mt-4 text-sm sm:text-base lg:text-lg text-white/85">
-                Located in Morocco&apos;s premier kite sports destination, our center offers easy
-                access to both lagoon and ocean conditions.
-              </p>
-
-              
-              <div className="mt-4 sm:mt-6 space-y-3 sm:space-y-4">
-                <div className="flex items-start gap-2 sm:gap-3">
-                  <MapPin className="h-4 w-4 sm:h-5 sm:w-5 text-sky-400 mt-0.5" />
-                  <div>
-                    <h4 className="font-semibold text-sm sm:text-base">Location</h4>
-                    <p className="text-white/80 text-xs sm:text-sm">Dakhla Lagoon, Morocco</p>
-                    <p className="text-white/70 text-xs">Perfect wind conditions year-round</p>
-                  </div>
-                </div>
-
-                <div className="flex items-start gap-2 sm:gap-3">
-                  <Phone className="h-4 w-4 sm:h-5 sm:w-5 text-sky-400 mt-0.5" />
-                  <div>
-                    <h4 className="font-semibold text-sm sm:text-base">Phone</h4>
-                    <p className="text-white/80 text-xs sm:text-sm">+212 528 93 XX XX</p>
-                  </div>
-                </div>
-
-                <div className="flex items-start gap-2 sm:gap-3">
-                  <Mail className="h-4 w-4 sm:h-5 sm:w-5 text-sky-400 mt-0.5" />
-                  <div>
-                    <h4 className="font-semibold text-sm sm:text-base">Email</h4>
-                    <p className="text-white/80 text-xs sm:text-sm">info@kitedakhla.com</p>
-                  </div>
-                </div>
-              </div>
-
-             
-              <div className="mt-5 sm:mt-8 flex flex-col sm:flex-row gap-3 sm:gap-4">
-                <Link href="/contact" className="w-full sm:w-auto">
-                  <Button size="lg" className="w-full sm:w-auto">Get In Touch</Button>
-                </Link>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section> */}
-
-
       <section className="relative w-full h-[90vh] overflow-hidden">
         {/* blurred bg video fills edges */}
         <video
@@ -540,7 +410,7 @@ export default function HomePage() {
           playsInline
           className="absolute inset-0 w-full h-full object-cover  scale-110 opacity-70"
         >
-          <source src="/videos/HERO VIDEO.mp4" type="video/mp4" />
+          <source src="/videos/HERO VIDEO-1.mp4" type="video/mp4" />
         </video>
 
         {/* centered card: tall on mobile, 16:9 on ≥sm */}
@@ -553,18 +423,7 @@ export default function HomePage() {
         rounded-xl overflow-hidden shadow-2xl ring-1 ring-white/10
       "
           >
-            {/* foreground video (kept intact) */}
-            <video
-              autoPlay
-              loop
-              muted
-              playsInline
-              className="absolute inset-0 "
-            >
-
-            </video>
-
-
+            
             {/* text over the video */}
             <div className="absolute inset-0 flex items-end sm:items-center">
               <div className="w-full sm:max-w-lg px-4 sm:px-6 lg:px-8 pb-4 sm:py-8 text-white">
