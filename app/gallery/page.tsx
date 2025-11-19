@@ -168,7 +168,7 @@ export default function GalleryPage() {
           playsInline
           className="absolute inset-0 w-full h-full object-cover"
         >
-          <source src="/videos/Hero video.mp4" type="video/mp4" />
+          <source src="/videos/Hero video-1.mp4" type="video/mp4" />
         </video>
         <div className="absolute inset-0 bg-black/50 flex flex-col items-center justify-center text-center text-white p-6">
           <motion.h1

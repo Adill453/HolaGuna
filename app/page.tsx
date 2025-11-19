@@ -410,7 +410,7 @@ export default function HomePage() {
           playsInline
           className="absolute inset-0 w-full h-full object-cover  scale-110 opacity-70"
         >
-          <source src="/videos/HERO VIDEO.mp4" type="video/mp4" />
+          <source src="/videos/Hero Video-2.mp4" type="video/mp4" />
         </video>
 
         {/* centered card: tall on mobile, 16:9 on ≥sm */}
