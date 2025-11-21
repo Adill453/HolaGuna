@@ -36,7 +36,7 @@
     npx prisma studio 
     ```
 7. seeders (optional) :
-    (if you reset the db its reset the hosted one and if you seed, its changes too so don't)
+    (if you reset the db its reset the hosted one and if you seed, its changes too, so don't)
     ```sh
    npm run db:push
    npm run db:seed
