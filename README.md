@@ -8,6 +8,9 @@
 
 
 1. Clone the repository:
+    ```sh
+    git clone https://github.com/Adill453/HolaGuna.git
+    ```
    
 
 3. Install dependencies:
@@ -33,7 +36,7 @@
     npx prisma studio 
     ```
 7. seeders (optional) :
-
+    (if you reset the db its reset the hosted one and if you seed, its changes too so don't)
     ```sh
    npm run db:push
    npm run db:seed
@@ -43,18 +46,10 @@
 Create a `.env.local` file in the root directory with the following variables:
 
 ```env
-# Database
-DATABASE_URL="file:./kite-sports.db"
 
-# JWT Secret for authentication
-JWT_SECRET="your-secret-key-change-in-production"
+# URL de la base de données PostgreSQL
+DATABASE_URL="postgres://9f0a30c0f350c95e90847131495d8dd1ff99f17477bbad7bbb4bcf0a1f790cc9:sk_S9udrrFPN7GS2b4nZyyzT@db.prisma.io:5432/postgres?sslmode=require"
 
-# OpenWeatherMap API Key for live weather data (optional)
-# Get your free API key at: https://openweathermap.org/api
-OPENWEATHER_API_KEY="your-openweathermap-api-key-here"
-
-# Next.js specific
-NEXT_PUBLIC_APP_URL="http://localhost:3000"
 ```
 
 ## Deployment
