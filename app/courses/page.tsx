@@ -43,7 +43,7 @@ export default function CoursesPage() {
     }
   }
 
-  // Booking is now handled by theee BookingModal component
+  // Booking is now handled by the BookingModal component
 
   return (
     <div className="min-h-screen bg-background">
@@ -63,12 +63,24 @@ export default function CoursesPage() {
       </section>
 
       {/* Courses Grid */}
-      <section className="py-10">
+      <section className="py-6">
   <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+    
     {loading ? (
       <div className="space-y-6">
-        {[...Array(5)].map((_, i) => (
-          <Skeleton key={i} className="h-32 w-full rounded-xl" />
+        {[...Array(6)].map((_, index) => (
+          <div
+            key={index}
+            className="flex gap-4 items-center border rounded-xl p-4 shadow-sm animate-pulse"
+          >
+            <Skeleton className="h-24 w-32 rounded-lg" />
+            <div className="flex-1 space-y-3">
+              <Skeleton className="h-5 w-1/2" />
+              <Skeleton className="h-4 w-3/4" />
+              <Skeleton className="h-4 w-2/4" />
+              <Skeleton className="h-8 w-full" />
+            </div>
+          </div>
         ))}
       </div>
     ) : error ? (
@@ -89,40 +101,47 @@ export default function CoursesPage() {
         {courses.map((course) => (
           <div
             key={course.id}
-            className="group border rounded-2xl p-6 bg-card/40 backdrop-blur-sm hover:bg-card shadow-sm hover:shadow-md transition-all cursor-pointer"
+            className="group flex gap-6 items-center border rounded-xl p-5 hover:shadow-lg transition-all cursor-pointer"
           >
-            {/* Top part: name + price */}
-            <div className="flex items-center justify-between">
-              <div>
-                <h3 className="text-2xl font-semibold flex items-center gap-2">
-                  <Award className="h-5 w-5 text-primary" />
-                  {course.name}
-                </h3>
-                <p className="text-muted-foreground mt-1">{course.description}</p>
-              </div>
+            {/* Image */}
+            <div className="relative min-w-[140px] h-28 overflow-hidden rounded-lg">
+              <img
+                src={course.imageUrl || "/placeholder.svg?height=200&width=300"}
+                alt={course.name}
+                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+              />
+              <span className="absolute top-2 right-2 bg-background/80 backdrop-blur px-2 py-1 rounded-md text-sm font-medium">
+                €{course.price}
+              </span>
+            </div>
 
-              <div className="text-right">
-                <p className="text-3xl font-bold text-primary">€{course.price}</p>
-                <p className="text-xs text-muted-foreground">per person</p>
+            {/* Text content */}
+            <div className="flex-1">
+              <h3 className="text-lg font-semibold flex items-center gap-2">
+                <Award className="h-5 w-5 text-primary" />
+                {course.name}
+              </h3>
+              <p className="text-muted-foreground text-sm mt-1 line-clamp-2">
+                {course.description}
+              </p>
+
+              <div className="flex gap-6 items-center text-sm text-muted-foreground mt-3">
+                <div className="flex items-center gap-1">
+                  <Clock className="h-4 w-4" />
+                  {course.durationHours}h lesson
+                </div>
+                <div className="flex items-center gap-1">
+                  <Users className="h-4 w-4" />
+                  Max {course.maxParticipants}
+                </div>
               </div>
             </div>
 
-            {/* Separator */}
-            <div className="border-t my-4"></div>
-
-            {/* Info list */}
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 text-sm text-muted-foreground">
-              <div className="flex items-center gap-2">
-                <Clock className="h-4 w-4 text-primary" />
-                <span>{course.durationHours}h lesson</span>
-              </div>
-
-              <div className="flex items-center gap-2">
-                <Users className="h-4 w-4 text-primary" />
-                <span>Max {course.maxParticipants}</span>
-              </div>
-
-              <div className="flex justify-start sm:justify-end">
+            {/* Price & booking */}
+            <div className="text-right flex flex-col items-end">
+              <p className="text-xl font-bold text-primary">€{course.price}</p>
+              <p className="text-xs text-muted-foreground">per person</p>
+              <div className="mt-2">
                 <BookingModal courseId={course.id} courseName={course.name} />
               </div>
             </div>
@@ -132,6 +151,7 @@ export default function CoursesPage() {
     )}
   </div>
 </section>
+
 
       {/* Why Choose Our Courses */}
       <section className="py-16 bg-card/50">
