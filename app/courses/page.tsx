@@ -63,96 +63,75 @@ export default function CoursesPage() {
       </section>
 
       {/* Courses Grid */}
-      <section className="py-4">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          {loading ? (
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {[...Array(6)].map((_, index) => (
-                <Card key={index}>
-                  <div className="relative">
-                    <Skeleton className="w-full h-48 rounded-lg" />
-                  </div>
-                  <CardHeader>
-                    <Skeleton className="h-6 w-3/4" />
-                    <Skeleton className="h-4 w-full" />
-                    <Skeleton className="h-4 w-2/3" />
-                  </CardHeader>
-                  <CardContent>
-                    <div className="space-y-3">
-                      <div className="flex justify-between">
-                        <Skeleton className="h-4 w-20" />
-                        <Skeleton className="h-4 w-16" />
-                      </div>
-                      <Skeleton className="h-10 w-full" />
-                    </div>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
-          ) : error ? (
-            <div className="text-center py-12">
-              <p className="text-muted-foreground text-lg">{error}</p>
-              <Button onClick={fetchCourses} className="mt-4">
-                Try Again
-              </Button>
-            </div>
-          ) : courses.length === 0 ? (
-            <div className="text-center py-12">
-              <BookOpen className="h-16 w-16 text-muted-foreground mx-auto mb-4" />
-              <h3 className="text-xl font-semibold mb-2">No Courses Available</h3>
-              <p className="text-muted-foreground">Check back soon for new course offerings!</p>
-            </div>
-          ) : (
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {courses.map((course) => (
-                <Card key={course.id} className="group hover:shadow-lg transition-shadow">
-                  <div className="relative overflow-hidden rounded-lg">
-                    <img
-                      src={course.imageUrl || "/placeholder.svg?height=300&width=400"}
-                      alt={course.name}
-                      className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
-                    />
-                    <div className="absolute top-4 right-4">
-                      <Badge variant="secondary" className="bg-background/90 text-foreground">
-                        €{course.price}
-                      </Badge>
-                    </div>
-                  </div>
+      <section className="py-10">
+  <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+    {loading ? (
+      <div className="space-y-6">
+        {[...Array(5)].map((_, i) => (
+          <Skeleton key={i} className="h-32 w-full rounded-xl" />
+        ))}
+      </div>
+    ) : error ? (
+      <div className="text-center py-12">
+        <p className="text-muted-foreground text-lg">{error}</p>
+        <Button onClick={fetchCourses} className="mt-4">
+          Try Again
+        </Button>
+      </div>
+    ) : courses.length === 0 ? (
+      <div className="text-center py-12">
+        <BookOpen className="h-16 w-16 text-muted-foreground mx-auto mb-4" />
+        <h3 className="text-xl font-semibold mb-2">No Courses Available</h3>
+        <p className="text-muted-foreground">Check back soon for new course offerings!</p>
+      </div>
+    ) : (
+      <div className="space-y-6">
+        {courses.map((course) => (
+          <div
+            key={course.id}
+            className="group border rounded-2xl p-6 bg-card/40 backdrop-blur-sm hover:bg-card shadow-sm hover:shadow-md transition-all cursor-pointer"
+          >
+            {/* Top part: name + price */}
+            <div className="flex items-center justify-between">
+              <div>
+                <h3 className="text-2xl font-semibold flex items-center gap-2">
+                  <Award className="h-5 w-5 text-primary" />
+                  {course.name}
+                </h3>
+                <p className="text-muted-foreground mt-1">{course.description}</p>
+              </div>
 
-                  <CardHeader>
-                    <CardTitle className="flex items-center gap-2">
-                      <Award className="h-5 w-5 text-primary" />
-                      {course.name}
-                    </CardTitle>
-                    <CardDescription className="text-pretty">{course.description}</CardDescription>
-                  </CardHeader>
-
-                  <CardContent className="space-y-4">
-                    <div className="flex items-center justify-between text-sm text-muted-foreground">
-                      <div className="flex items-center gap-1">
-                        <Clock className="h-4 w-4" />
-                        <span>{course.durationHours}h lesson</span>
-                      </div>
-                      <div className="flex items-center gap-1">
-                        <Users className="h-4 w-4" />
-                        <span>Max {course.maxParticipants}</span>
-                      </div>
-                    </div>
-
-                    <div className="flex items-center justify-between">
-                      <div>
-                        <p className="text-2xl font-bold text-primary">€{course.price}</p>
-                        <p className="text-xs text-muted-foreground">per person</p>
-                      </div>
-                      <BookingModal courseId={course.id} courseName={course.name} />
-                    </div>
-                  </CardContent>
-                </Card>
-              ))}
+              <div className="text-right">
+                <p className="text-3xl font-bold text-primary">€{course.price}</p>
+                <p className="text-xs text-muted-foreground">per person</p>
+              </div>
             </div>
-          )}
-        </div>
-      </section>
+
+            {/* Separator */}
+            <div className="border-t my-4"></div>
+
+            {/* Info list */}
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 text-sm text-muted-foreground">
+              <div className="flex items-center gap-2">
+                <Clock className="h-4 w-4 text-primary" />
+                <span>{course.durationHours}h lesson</span>
+              </div>
+
+              <div className="flex items-center gap-2">
+                <Users className="h-4 w-4 text-primary" />
+                <span>Max {course.maxParticipants}</span>
+              </div>
+
+              <div className="flex justify-start sm:justify-end">
+                <BookingModal courseId={course.id} courseName={course.name} />
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    )}
+  </div>
+</section>
 
       {/* Why Choose Our Courses */}
       <section className="py-16 bg-card/50">
