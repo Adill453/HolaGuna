@@ -43,7 +43,7 @@ export default function CoursesPage() {
     }
   }
 
-  // Booking is now handled by the BookingModal component
+  // Booking is now handled by theee BookingModal component
 
   return (
     <div className="min-h-screen bg-background">
