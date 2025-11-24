@@ -63,94 +63,67 @@ export default function CoursesPage() {
       </section>
 
       {/* Courses Grid */}
-      <section className="py-6">
-  <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-    
-    {loading ? (
-      <div className="space-y-6">
-        {[...Array(6)].map((_, index) => (
+      <div className="space-y-8">
+  {courses.map((course) => (
+    <div
+      key={course.id}
+      className="bg-gradient-to-b from-[#061a35] to-[#020b18] p-6 rounded-2xl shadow-xl border border-white/10 relative overflow-hidden"
+    >
+      {/* Top Row */}
+      <div className="flex items-start justify-between">
+        <div>
+          <h3 className="text-2xl font-bold text-white flex items-center gap-2">
+            <Award className="h-6 w-6 text-primary" />
+            {course.name}
+          </h3>
+
+          <p className="text-gray-300 text-sm mt-1 max-w-md">
+            {course.description}
+          </p>
+        </div>
+
+        {/* Big Price */}
+        <div className="text-right">
+          <p className="text-4xl font-extrabold text-white tracking-tight">
+            €{course.price}
+          </p>
+          <p className="text-gray-400 text-xs">per person ({course.durationHours}h)</p>
+        </div>
+      </div>
+
+      {/* Divider */}
+      <div className="h-px bg-white/10 my-5" />
+
+      {/* List like the provided image */}
+      <div className="space-y-3">
+        {course.pricingOptions?.map((opt, idx) => (
           <div
-            key={index}
-            className="flex gap-4 items-center border rounded-xl p-4 shadow-sm animate-pulse"
+            key={idx}
+            className="flex justify-between text-gray-200 text-sm border-b border-white/10 pb-2"
           >
-            <Skeleton className="h-24 w-32 rounded-lg" />
-            <div className="flex-1 space-y-3">
-              <Skeleton className="h-5 w-1/2" />
-              <Skeleton className="h-4 w-3/4" />
-              <Skeleton className="h-4 w-2/4" />
-              <Skeleton className="h-8 w-full" />
-            </div>
+            <span className="font-medium">{opt.hours} H</span>
+            <span className="font-semibold">€{opt.price}</span>
           </div>
         ))}
       </div>
-    ) : error ? (
-      <div className="text-center py-12">
-        <p className="text-muted-foreground text-lg">{error}</p>
-        <Button onClick={fetchCourses} className="mt-4">
-          Try Again
-        </Button>
-      </div>
-    ) : courses.length === 0 ? (
-      <div className="text-center py-12">
-        <BookOpen className="h-16 w-16 text-muted-foreground mx-auto mb-4" />
-        <h3 className="text-xl font-semibold mb-2">No Courses Available</h3>
-        <p className="text-muted-foreground">Check back soon for new course offerings!</p>
-      </div>
-    ) : (
-      <div className="space-y-6">
-        {courses.map((course) => (
-          <div
-            key={course.id}
-            className="group flex gap-6 items-center border rounded-xl p-5 hover:shadow-lg transition-all cursor-pointer"
-          >
-            {/* Image */}
-            <div className="relative min-w-[140px] h-28 overflow-hidden rounded-lg">
-              <img
-                src={course.imageUrl || "/placeholder.svg?height=200&width=300"}
-                alt={course.name}
-                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-              />
-              <span className="absolute top-2 right-2 bg-background/80 backdrop-blur px-2 py-1 rounded-md text-sm font-medium">
-                €{course.price}
-              </span>
-            </div>
 
-            {/* Text content */}
-            <div className="flex-1">
-              <h3 className="text-lg font-semibold flex items-center gap-2">
-                <Award className="h-5 w-5 text-primary" />
-                {course.name}
-              </h3>
-              <p className="text-muted-foreground text-sm mt-1 line-clamp-2">
-                {course.description}
-              </p>
-
-              <div className="flex gap-6 items-center text-sm text-muted-foreground mt-3">
-                <div className="flex items-center gap-1">
-                  <Clock className="h-4 w-4" />
-                  {course.durationHours}h lesson
-                </div>
-                <div className="flex items-center gap-1">
-                  <Users className="h-4 w-4" />
-                  Max {course.maxParticipants}
-                </div>
-              </div>
-            </div>
-
-            {/* Price & booking */}
-            <div className="text-right flex flex-col items-end">
-              <p className="text-xl font-bold text-primary">€{course.price}</p>
-              <p className="text-xs text-muted-foreground">per person</p>
-              <div className="mt-2">
-                <BookingModal courseId={course.id} courseName={course.name} />
-              </div>
-            </div>
-          </div>
-        ))}
+      {/* Extra information */}
+      <div className="flex items-center gap-6 text-sm text-gray-400 mt-5">
+        <span className="flex items-center gap-1">
+          <Users className="h-4 w-4" /> Max {course.maxParticipants}
+        </span>
+        <span className="flex items-center gap-1">
+          <Clock className="h-4 w-4" /> {course.durationHours} hours
+        </span>
       </div>
-    )}
-  </div>
-</section>
+
+      {/* Booking */}
+      <div className="mt-6 flex justify-end">
+        <BookingModal courseId={course.id} courseName={course.name} />
+      </div>
+    </div>
+  ))}
+</div>
 
 
       {/* Why Choose Our Courses */}
