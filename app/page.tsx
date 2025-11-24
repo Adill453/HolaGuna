@@ -250,7 +250,9 @@ export default function HomePage() {
                   <div className="absolute top-4 right-4">
                     <Badge variant="secondary">{sport.price}</Badge>
                   </div>
-                  <div className="absolute bottom-2 left-2 right-2 px-3 py-1 text-white backdrop-blur-xs hover:bg-black/70 rounded-2xl">
+                  <div className="absolute bottom-1 left-1 right-1 
+                              group-hover:bg-black/50 backdrop-blur-xs text-white
+                                px-4 pt-2 pb-2 rounded-xl">
                     <CardTitle className="flex items-center gap-2 ">
                       <img src="/logo.png" alt="Ola Y Lagona" className="h-5 w-5" />
                       {sport.title}

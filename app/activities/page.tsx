@@ -116,32 +116,71 @@ export default function ActivitiesPage() {
           ) : (
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
               {activities.map((activity) => (
-                <Card key={activity.id} className="group hover:shadow-lg transition-shadow">
-                  <div className="relative overflow-hidden rounded-lg">
+                <div key={activity.id} className="group hover:shadow-lg transition-shadow">
+
+                  <div className="relative overflow-hidden rounded-lg group">
                     <img
                       src={activity.imageUrl || "/placeholder.svg?height=300&width=400"}
                       alt={activity.name}
-                      className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                       onError={(e) => {
                         console.log("Image failed to load:", activity.imageUrl, "Activity:", activity.name)
                         e.currentTarget.src = "/placeholder.svg?height=300&width=400"
                       }}
                     />
+
+                    {/* Duration */}
                     <div className="absolute top-4 right-4">
                       <Badge variant="secondary" className="bg-background/90 text-foreground">
-                        €{activity.price}
+                        <Clock className="h-4 w-4" />
+                        {activity.durationHours}h
                       </Badge>
                     </div>
-                    {activity.equipmentIncluded && (
-                      <div className="absolute top-4 left-4">
-                        <Badge variant="default" className="bg-primary/90 text-primary-foreground">
+
+                    {/* Equipment */}
+                    <div className="absolute top-4 left-4">
+                      {activity.equipmentIncluded ? (
+                        <Badge variant="default" className="bg-background/90 text-green-600">
+                          <CheckCircle className="h-4 w-4 text-green-600" />
                           Equipment Included
                         </Badge>
+                      ) : (
+                        <Badge variant="default" className="bg-background/90 text-orange-600">
+                          <XCircle className="h-4 w-4 text-orange-600" />
+                          Bring Your Own Equipment
+                        </Badge>
+                      )}
+                    </div>
+
+                    {/* Bottom content */}
+                    <div className="absolute bottom-0 left-0 right-0 
+                              group-hover:bg-black/50 backdrop-blur-xs text-white
+                                px-4 pt-3 pb-4 
+                                transition-all duration-300 
+                                max-h-20 group-hover:max-h-40 
+                                overflow-hidden
+                                rounded-t-xl">
+
+                      <CardTitle className="flex items-center gap-2">
+                        <Waves className="h-5 w-5 text-primary" />
+                        {activity.name}
+                      </CardTitle>
+
+                      <CardDescription className="text-zinc-300">
+                        {activity.description}
+                      </CardDescription>
+
+                      {/* Booking button - only visible on hover */}
+                      <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 mt-3">
+                        {renderBookingButton(activity)}
                       </div>
-                    )}
+
+                    </div>
                   </div>
 
-                  <CardHeader>
+
+
+                  {/* <CardHeader>
                     <CardTitle className="flex items-center gap-2">
                       {activity.name.toLowerCase().includes("photo") ? (
                         <Camera className="h-5 w-5 text-primary" />
@@ -151,9 +190,9 @@ export default function ActivitiesPage() {
                       {activity.name}
                     </CardTitle>
                     <CardDescription className="text-pretty">{activity.description}</CardDescription>
-                  </CardHeader>
+                  </CardHeader> */}
 
-                  <CardContent className="space-y-4">
+                  {/* <CardContent className="space-y-4">
                     <div className="flex items-center justify-between text-sm">
                       <div className="flex items-center gap-1 text-muted-foreground">
                         <Clock className="h-4 w-4" />
@@ -175,14 +214,11 @@ export default function ActivitiesPage() {
                     </div>
 
                     <div className="flex items-center justify-between">
-                      <div>
-                        <p className="text-2xl font-bold text-primary">€{activity.price}</p>
-                        <p className="text-xs text-muted-foreground">per person</p>
-                      </div>
+
                       {renderBookingButton(activity)}
                     </div>
-                  </CardContent>
-                </Card>
+                  </CardContent> */}
+                </div>
               ))}
             </div>
           )}
