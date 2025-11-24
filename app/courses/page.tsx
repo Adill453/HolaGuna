@@ -23,7 +23,27 @@ export default function CoursesPage() {
   const [courses, setCourses] = useState<Course[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
-
+  const groupOptions = [
+    { hours: 4, price: 140 },
+    { hours: 6, price: 210 },
+    { hours: 8, price: 280 },
+    { hours: 10, price: 350 },
+    { hours: 12, price: 420 },
+    { hours: 20, price: 700 },
+  ];
+  
+  const privateOptions = [
+    { hours: 2, price: 120 },
+    { hours: 4, price: 220 },
+    { hours: 6, price: 320 },
+  ];
+  
+  const semiOptions = [
+    { hours: 2, price: 95 },
+    { hours: 4, price: 180 },
+    { hours: 6, price: 260 },
+  ];
+  
   useEffect(() => {
     fetchCourses()
   }, [])
@@ -63,68 +83,83 @@ export default function CoursesPage() {
       </section>
 
       {/* Courses Grid */}
-      <div className="space-y-8">
-  {courses.map((course) => (
-    <div
-      key={course.id}
-      className="bg-gradient-to-b from-[#061a35] to-[#020b18] p-6 rounded-2xl shadow-xl border border-white/10 relative overflow-hidden"
-    >
-      {/* Top Row */}
-      <div className="flex items-start justify-between">
-        <div>
-          <h3 className="text-2xl font-bold text-white flex items-center gap-2">
-            <Award className="h-6 w-6 text-primary" />
-            {course.name}
-          </h3>
+      <section className="py-10">
+  <div className="max-w-4xl mx-auto px-4">
 
-          <p className="text-gray-300 text-sm mt-1 max-w-md">
-            {course.description}
-          </p>
-        </div>
+    <div className="bg-[#061a35] rounded-2xl p-6 shadow-xl border border-white/10">
 
-        {/* Big Price */}
-        <div className="text-right">
-          <p className="text-4xl font-extrabold text-white tracking-tight">
-            €{course.price}
-          </p>
-          <p className="text-gray-400 text-xs">per person ({course.durationHours}h)</p>
-        </div>
+      {/* Header */}
+      <h2 className="text-2xl font-bold text-white mb-6 tracking-wide">PACKAGES</h2>
+
+      {/* Select currency (optional) */}
+      <div className="flex justify-end mb-6">
+        <select className="bg-white/10 text-white px-3 py-2 rounded-lg border border-white/20">
+          <option>EUR</option>
+          <option>MAD</option>
+          <option>USD</option>
+        </select>
       </div>
 
-      {/* Divider */}
-      <div className="h-px bg-white/10 my-5" />
+      {/* GRID 3 COLUMNS */}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
 
-      {/* List like the provided image */}
-      <div className="space-y-3">
-        {course.pricingOptions?.map((opt, idx) => (
-          <div
-            key={idx}
-            className="flex justify-between text-gray-200 text-sm border-b border-white/10 pb-2"
-          >
-            <span className="font-medium">{opt.hours} H</span>
-            <span className="font-semibold">€{opt.price}</span>
+        {/* GROUP */}
+        <div className="bg-gradient-to-b from-[#0b2348] to-[#051529] p-5 rounded-xl border border-white/10">
+          <h3 className="text-xl font-semibold text-white mb-4">GROUP</h3>
+
+          <p className="text-4xl font-bold text-white">70€</p>
+          <p className="text-gray-300 text-sm mb-4">/person (2H)</p>
+
+          {/* Group Prices */}
+          <div className="space-y-2">
+            {groupOptions.map((opt, i) => (
+              <div key={i} className="flex justify-between border-b border-white/10 pb-2">
+                <span className="text-gray-200">{opt.hours} H</span>
+                <span className="text-white font-medium">{opt.price} €</span>
+              </div>
+            ))}
           </div>
-        ))}
+        </div>
+
+        {/* PRIVATE */}
+        <div className="bg-gradient-to-b from-[#0b2348] to-[#051529] p-5 rounded-xl border border-white/10">
+          <h3 className="text-xl font-semibold text-white mb-4">PRIVATE</h3>
+
+          <p className="text-4xl font-bold text-white">120€</p>
+          <p className="text-gray-300 text-sm mb-4">/person (2H)</p>
+
+          {privateOptions.map((opt, i) => (
+            <div key={i} className="flex justify-between border-b border-white/10 pb-2">
+              <span className="text-gray-200">{opt.hours} H</span>
+              <span className="text-white font-medium">{opt.price} €</span>
+            </div>
+          ))}
+        </div>
+
+        {/* SEMI PRIVATE */}
+        <div className="bg-gradient-to-b from-[#0b2348] to-[#051529] p-5 rounded-xl border border-white/10">
+          <h3 className="text-xl font-semibold text-white mb-4">SEMI-PRIVATE</h3>
+
+          <p className="text-4xl font-bold text-white">95€</p>
+          <p className="text-gray-300 text-sm mb-4">/person (2H)</p>
+
+          {semiOptions.map((opt, i) => (
+            <div key={i} className="flex justify-between border-b border-white/10 pb-2">
+              <span className="text-gray-200">{opt.hours} H</span>
+              <span className="text-white font-medium">{opt.price} €</span>
+            </div>
+          ))}
+        </div>
+
       </div>
 
-      {/* Extra information */}
-      <div className="flex items-center gap-6 text-sm text-gray-400 mt-5">
-        <span className="flex items-center gap-1">
-          <Users className="h-4 w-4" /> Max {course.maxParticipants}
-        </span>
-        <span className="flex items-center gap-1">
-          <Clock className="h-4 w-4" /> {course.durationHours} hours
-        </span>
-      </div>
-
-      {/* Booking */}
-      <div className="mt-6 flex justify-end">
-        <BookingModal courseId={course.id} courseName={course.name} />
-      </div>
+      {/* Footer */}
+      <p className="text-gray-400 text-xs text-center mt-6">
+        Prices shown are approximate. Accurate pricing is in EUR.
+      </p>
     </div>
-  ))}
-</div>
-
+  </div>
+</section>
 
       {/* Why Choose Our Courses */}
       <section className="py-16 bg-card/50">
