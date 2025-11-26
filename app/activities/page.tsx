@@ -177,47 +177,6 @@ export default function ActivitiesPage() {
 
                     </div>
                   </div>
-
-
-
-                  {/* <CardHeader>
-                    <CardTitle className="flex items-center gap-2">
-                      {activity.name.toLowerCase().includes("photo") ? (
-                        <Camera className="h-5 w-5 text-primary" />
-                      ) : (
-                        <Waves className="h-5 w-5 text-primary" />
-                      )}
-                      {activity.name}
-                    </CardTitle>
-                    <CardDescription className="text-pretty">{activity.description}</CardDescription>
-                  </CardHeader> */}
-
-                  {/* <CardContent className="space-y-4">
-                    <div className="flex items-center justify-between text-sm">
-                      <div className="flex items-center gap-1 text-muted-foreground">
-                        <Clock className="h-4 w-4" />
-                        <span>{activity.durationHours}h duration</span>
-                      </div>
-                      <div className="flex items-center gap-1">
-                        {activity.equipmentIncluded ? (
-                          <>
-                            <CheckCircle className="h-4 w-4 text-green-600" />
-                            <span className="text-green-600 text-sm">Equipment included</span>
-                          </>
-                        ) : (
-                          <>
-                            <XCircle className="h-4 w-4 text-orange-600" />
-                            <span className="text-orange-600 text-sm">Bring your own</span>
-                          </>
-                        )}
-                      </div>
-                    </div>
-
-                    <div className="flex items-center justify-between">
-
-                      {renderBookingButton(activity)}
-                    </div>
-                  </CardContent> */}
                 </div>
               ))}
             </div>
