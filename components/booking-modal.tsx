@@ -22,6 +22,7 @@ interface Package {
   id: number
   hours: number
   price: number
+  description?: string | null
   isActive: boolean
 }
 

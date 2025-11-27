@@ -60,14 +60,15 @@ model CourseCategory {
 }
 
 model CoursePackage {
-  id         Int            @id @default(autoincrement())
-  hours      Int
-  price      Float
-  categoryId Int            @map("category_id")
-  isActive   Boolean        @default(true) @map("is_active")
-  category   CourseCategory @relation(fields: [categoryId], references: [id], onDelete: Cascade)
-  createdAt  DateTime       @default(now()) @map("created_at")
-  updatedAt  DateTime       @updatedAt @map("updated_at")
+  id          Int            @id @default(autoincrement())
+  hours       Int
+  price       Float
+  description String?
+  categoryId  Int            @map("category_id")
+  isActive    Boolean        @default(true) @map("is_active")
+  category    CourseCategory @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  createdAt   DateTime       @default(now()) @map("created_at")
+  updatedAt   DateTime       @updatedAt @map("updated_at")
 
   bookings Booking[]
 

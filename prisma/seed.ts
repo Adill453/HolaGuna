@@ -28,7 +28,7 @@ async function main() {
   // Group Category
   const groupCategory = await prisma.courseCategory.create({
     data: {
-      name: "Group",
+      name: "kitesurfing Group",
       description: "Learn kitesurfing in a group setting with up to 8 participants. Perfect for learning with others and making new friends.",
       imageUrl: "/kitesurfing-2.webp",
       packages: {
@@ -48,7 +48,7 @@ async function main() {
   // Semi-Private Category
   const semiPrivateCategory = await prisma.courseCategory.create({
     data: {
-      name: "Semi-Private",
+      name: "kitesurfing Semi-Private",
       description: "Semi-private lessons with smaller groups (up to 3 participants). Get more personalized attention while still enjoying the group dynamic.",
       imageUrl: "/kitesurfing-3.webp",
       packages: {
@@ -67,7 +67,7 @@ async function main() {
   // Private Category
   const privateCategory = await prisma.courseCategory.create({
     data: {
-      name: "Private",
+      name: "kitesurfing Private",
       description: "One-on-one private lessons with dedicated instructor attention. Perfect for accelerated learning and personalized instruction.",
       imageUrl: "/kitesurfing-3.webp",
       packages: {
@@ -83,45 +83,94 @@ async function main() {
     },
   })
 
-  // Keep old Course model entries for backward compatibility (Buggy, Mountain Board, etc.)
-  await prisma.course.createMany({
-    data: [
-      // BUGGY courses
-      {
-        name: "Kite Buggy - Complete Beginner",
-        description: "Power kite lessons + kite buggy intro lesson. For complete beginners.",
-        price: 150.0,
-        durationHours: 3,
-        maxParticipants: 4,
-        courseType: CourseType.BUGGY,
-        pricingTier: null,
-        minAge: 12,
-        imageUrl: "/buggy-2.webp",
+  // BUGGY COMBO LESSON
+  const comboBuggyCategory = await prisma.courseCategory.create({
+    data: {
+      name: "BUGGY COMBO LESSON",
+      description: "For beginners & Includes first half of session completing a power kite lesson. AGE 12+",
+      imageUrl: "/buggy-2.webp",
+      packages: {
+        create: [
+          { 
+            hours: 3, 
+            price: 140.0, 
+            isActive: true,
+          },
+          { 
+            hours: 6, 
+            price: 260.0, 
+            isActive: true,
+          },
+        ],
       },
-      {
-        name: "Kite Buggy - Beginner",
-        description: "For power flyer with some good basic skills or for persons who control good a 4 lines kites + buggy intro lesson.",
-        price: 80.0,
-        durationHours: 1.5,
-        maxParticipants: 4,
-        courseType: CourseType.BUGGY,
-        pricingTier: null,
-        minAge: 12,
-        imageUrl: "/buggy-2.webp",
-      },
-      // MOUNTAIN BOARD courses
-      {
-        name: "Kiteland - Mountain Board",
-        description: "For power flyer with some good basic skills or for persons who control good a 4 lines kites + mountain board intro lesson.",
-        price: 80.0,
-        durationHours: 1.5,
-        maxParticipants: 4,
-        courseType: CourseType.MOUNTAIN_BOARD,
-        pricingTier: null,
-        imageUrl: "/mountain board-3.webp",
-      },
-    ],
+    },
   })
+
+  // KITE BUGGY - BEGINNER
+  const buggyBeginnerCategory = await prisma.courseCategory.create({
+    data: {
+      name: "BUGGY BEGINNER",
+      description: "Already completed our Power kite lesson Or been flying a 4 line for few years, here's your lesson. AGE 12+",
+      imageUrl: "/buggy-2.webp",
+      packages: {
+        create: [
+          { 
+            hours: 1.5, 
+            price: 95.0, 
+            isActive: true,
+          },
+          { 
+            hours: 3, 
+            price: 180.0, 
+            isActive: true,
+          },
+        ],
+      },
+    },
+  })
+
+  // Connected Buggy (for people with disabilities)
+  const connectedBuggyCategory = await prisma.courseCategory.create({
+    data: {
+      name: "Connected Buggy",
+      description: "For the people who haven't abilities to fly a kite (handicaps, blinds...). Our option is a connected buggy behind the principle one controlled by one of our team. You just have to sit there and enjoy the sand dunes. (SAFETY FIRST)",
+      imageUrl: "/buggy-2.webp",
+      packages: {
+        create: [
+          { 
+            hours: 1, 
+            price: 70.0, 
+            isActive: true,
+          },
+          { 
+            hours: 2, 
+            price: 130.0, 
+            isActive: true,
+          },
+        ],
+      },
+    },
+  })
+
+  // Landboard BEGINNER (Landboard)
+  const landboardCategory = await prisma.courseCategory.create({
+    data: {
+      name: "Landboard BEGINNER",
+      description: "For persons been flying a 4 line for few years",
+      imageUrl: "/mountain board-3.webp",
+      packages: {
+        create: [
+          { 
+            hours: 2, 
+            price: 80.0, 
+            isActive: true,
+          },
+        ],
+      },
+    },
+  })
+
+  
 
   // Create sample activities
   await prisma.activity.createMany({
