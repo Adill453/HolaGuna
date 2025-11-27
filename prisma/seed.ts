@@ -19,225 +19,73 @@ async function main() {
     },
   })
 
-  // Clear existing courses
+  // Clear existing data
+  await prisma.coursePackage.deleteMany({})
+  await prisma.courseCategory.deleteMany({})
   await prisma.course.deleteMany({})
 
-  // Create KITESURFING courses
-  // GROUP pricing
+  // Create Course Categories with Packages
+  // Group Category
+  const groupCategory = await prisma.courseCategory.create({
+    data: {
+      name: "Group",
+      description: "Learn kitesurfing in a group setting with up to 8 participants. Perfect for learning with others and making new friends.",
+      imageUrl: "/kitesurfing-2.webp",
+      packages: {
+        create: [
+          { hours: 2, price: 70.0, isActive: true },
+          { hours: 4, price: 140.0, isActive: true },
+          { hours: 6, price: 210.0, isActive: true },
+          { hours: 8, price: 280.0, isActive: true },
+          { hours: 10, price: 350.0, isActive: true },
+          { hours: 12, price: 420.0, isActive: true },
+          { hours: 20, price: 700.0, isActive: true },
+        ],
+      },
+    },
+  })
+
+  // Semi-Private Category
+  const semiPrivateCategory = await prisma.courseCategory.create({
+    data: {
+      name: "Semi-Private",
+      description: "Semi-private lessons with smaller groups (up to 3 participants). Get more personalized attention while still enjoying the group dynamic.",
+      imageUrl: "/kitesurfing-3.webp",
+      packages: {
+        create: [
+          { hours: 2, price: 110.0, isActive: true },
+          { hours: 4, price: 210.0, isActive: true },
+          { hours: 6, price: 305.0, isActive: true },
+          { hours: 8, price: 385.0, isActive: true },
+          { hours: 10, price: 450.0, isActive: true },
+          { hours: 12, price: 520.0, isActive: true },
+        ],
+      },
+    },
+  })
+
+  // Private Category
+  const privateCategory = await prisma.courseCategory.create({
+    data: {
+      name: "Private",
+      description: "One-on-one private lessons with dedicated instructor attention. Perfect for accelerated learning and personalized instruction.",
+      imageUrl: "/kitesurfing-3.webp",
+      packages: {
+        create: [
+          { hours: 2, price: 160.0, isActive: true },
+          { hours: 4, price: 300.0, isActive: true },
+          { hours: 6, price: 445.0, isActive: true },
+          { hours: 8, price: 575.0, isActive: true },
+          { hours: 10, price: 680.0, isActive: true },
+          { hours: 12, price: 780.0, isActive: true },
+        ],
+      },
+    },
+  })
+
+  // Keep old Course model entries for backward compatibility (Buggy, Mountain Board, etc.)
   await prisma.course.createMany({
     data: [
-      {
-        name: "Kitesurfing - Group - 2H",
-        description: "Group kitesurfing lesson for 2 hours. Perfect for learning with others.",
-        price: 70.0,
-        durationHours: 2,
-        maxParticipants: 8,
-        courseType: CourseType.KITESURFING,
-        pricingTier: PricingTier.GROUP,
-        imageUrl: "/kitesurfing-2.webp",
-      },
-      {
-        name: "Kitesurfing - Group - 4H",
-        description: "Group kitesurfing lesson for 4 hours.",
-        price: 140.0,
-        durationHours: 4,
-        maxParticipants: 8,
-        courseType: CourseType.KITESURFING,
-        pricingTier: PricingTier.GROUP,
-        imageUrl: "/kitesurfing-2.webp",
-      },
-      {
-        name: "Kitesurfing - Group - 6H",
-        description: "Group kitesurfing lesson for 6 hours.",
-        price: 210.0,
-        durationHours: 6,
-        maxParticipants: 8,
-        courseType: CourseType.KITESURFING,
-        pricingTier: PricingTier.GROUP,
-        imageUrl: "/kitesurfing-2.webp",
-      },
-      {
-        name: "Kitesurfing - Group - 8H",
-        description: "Group kitesurfing lesson for 8 hours.",
-        price: 280.0,
-        durationHours: 8,
-        maxParticipants: 8,
-        courseType: CourseType.KITESURFING,
-        pricingTier: PricingTier.GROUP,
-        imageUrl: "/kitesurfing-2.webp",
-      },
-      {
-        name: "Kitesurfing - Group - 10H",
-        description: "Group kitesurfing lesson for 10 hours.",
-        price: 350.0,
-        durationHours: 10,
-        maxParticipants: 8,
-        courseType: CourseType.KITESURFING,
-        pricingTier: PricingTier.GROUP,
-        imageUrl: "/kitesurfing-2.webp",
-      },
-      {
-        name: "Kitesurfing - Group - 12H",
-        description: "Group kitesurfing lesson for 12 hours.",
-        price: 420.0,
-        durationHours: 12,
-        maxParticipants: 8,
-        courseType: CourseType.KITESURFING,
-        pricingTier: PricingTier.GROUP,
-        imageUrl: "/kitesurfing-2.webp",
-      },
-      {
-        name: "Kitesurfing - Group - 20H",
-        description: "Group kitesurfing lesson for 20 hours.",
-        price: 700.0,
-        durationHours: 20,
-        maxParticipants: 8,
-        courseType: CourseType.KITESURFING,
-        pricingTier: PricingTier.GROUP,
-        imageUrl: "/kitesurfing-2.webp",
-      },
-      // SEMI-PRIVATE pricing
-      {
-        name: "Kitesurfing - Semi-Private - 2H",
-        description: "Semi-private kitesurfing lesson for 2 hours per person.",
-        price: 103.0,
-        durationHours: 2,
-        maxParticipants: 3,
-        courseType: CourseType.KITESURFING,
-        pricingTier: PricingTier.SEMI_PRIVATE,
-        imageUrl: "/kitesurfing-3.webp",
-      },
-      {
-        name: "Kitesurfing - Semi-Private - 4H",
-        description: "Semi-private kitesurfing lesson for 4 hours per person.",
-        price: 206.0,
-        durationHours: 4,
-        maxParticipants: 3,
-        courseType: CourseType.KITESURFING,
-        pricingTier: PricingTier.SEMI_PRIVATE,
-        imageUrl: "/kitesurfing-3.webp",
-      },
-      {
-        name: "Kitesurfing - Semi-Private - 6H",
-        description: "Semi-private kitesurfing lesson for 6 hours per person.",
-        price: 285.0,
-        durationHours: 6,
-        maxParticipants: 3,
-        courseType: CourseType.KITESURFING,
-        pricingTier: PricingTier.SEMI_PRIVATE,
-        imageUrl: "/kitesurfing-3.webp",
-      },
-      {
-        name: "Kitesurfing - Semi-Private - 8H",
-        description: "Semi-private kitesurfing lesson for 8 hours per person.",
-        price: 355.0,
-        durationHours: 8,
-        maxParticipants: 3,
-        courseType: CourseType.KITESURFING,
-        pricingTier: PricingTier.SEMI_PRIVATE,
-        imageUrl: "/kitesurfing-3.webp",
-      },
-      {
-        name: "Kitesurfing - Semi-Private - 10H",
-        description: "Semi-private kitesurfing lesson for 10 hours per person.",
-        price: 417.0,
-        durationHours: 10,
-        maxParticipants: 3,
-        courseType: CourseType.KITESURFING,
-        pricingTier: PricingTier.SEMI_PRIVATE,
-        imageUrl: "/kitesurfing-3.webp",
-      },
-      {
-        name: "Kitesurfing - Semi-Private - 12H",
-        description: "Semi-private kitesurfing lesson for 12 hours per person.",
-        price: 500.0,
-        durationHours: 12,
-        maxParticipants: 3,
-        courseType: CourseType.KITESURFING,
-        pricingTier: PricingTier.SEMI_PRIVATE,
-        imageUrl: "/kitesurfing-3.webp",
-      },
-      {
-        name: "Kitesurfing - Semi-Private - Extra 2H",
-        description: "Extra 2 hours for semi-private kitesurfing lesson.",
-        price: 75.0,
-        durationHours: 2,
-        maxParticipants: 3,
-        courseType: CourseType.KITESURFING,
-        pricingTier: PricingTier.SEMI_PRIVATE,
-        imageUrl: "/kitesurfing-3.webp",
-      },
-      // PRIVATE pricing
-      {
-        name: "Kitesurfing - Private - 2H",
-        description: "Private kitesurfing lesson for 2 hours.",
-        price: 150.0,
-        durationHours: 2,
-        maxParticipants: 1,
-        courseType: CourseType.KITESURFING,
-        pricingTier: PricingTier.PRIVATE,
-        imageUrl: "/kitesurfing-3.webp",
-      },
-      {
-        name: "Kitesurfing - Private - 4H",
-        description: "Private kitesurfing lesson for 4 hours.",
-        price: 285.0,
-        durationHours: 4,
-        maxParticipants: 1,
-        courseType: CourseType.KITESURFING,
-        pricingTier: PricingTier.PRIVATE,
-        imageUrl: "/kitesurfing-3.webp",
-      },
-      {
-        name: "Kitesurfing - Private - 6H",
-        description: "Private kitesurfing lesson for 6 hours.",
-        price: 410.0,
-        durationHours: 6,
-        maxParticipants: 1,
-        courseType: CourseType.KITESURFING,
-        pricingTier: PricingTier.PRIVATE,
-        imageUrl: "/kitesurfing-3.webp",
-      },
-      {
-        name: "Kitesurfing - Private - 8H",
-        description: "Private kitesurfing lesson for 8 hours.",
-        price: 520.0,
-        durationHours: 8,
-        maxParticipants: 1,
-        courseType: CourseType.KITESURFING,
-        pricingTier: PricingTier.PRIVATE,
-        imageUrl: "/kitesurfing-3.webp",
-      },
-      {
-        name: "Kitesurfing - Private - 10H",
-        description: "Private kitesurfing lesson for 10 hours.",
-        price: 626.0,
-        durationHours: 10,
-        maxParticipants: 1,
-        courseType: CourseType.KITESURFING,
-        pricingTier: PricingTier.PRIVATE,
-        imageUrl: "/kitesurfing-3.webp",
-      },
-      {
-        name: "Kitesurfing - Private - 12H",
-        description: "Private kitesurfing lesson for 12 hours.",
-        price: 745.0,
-        durationHours: 12,
-        maxParticipants: 1,
-        courseType: CourseType.KITESURFING,
-        pricingTier: PricingTier.PRIVATE,
-        imageUrl: "/kitesurfing-3.webp",
-      },
-      {
-        name: "Kitesurfing - Private - Extra 2H",
-        description: "Extra 2 hours for private kitesurfing lesson.",
-        price: 125.0,
-        durationHours: 2,
-        maxParticipants: 1,
-        courseType: CourseType.KITESURFING,
-        pricingTier: PricingTier.PRIVATE,
-        imageUrl: "/kitesurfing-3.webp",
-      },
       // BUGGY courses
       {
         name: "Kite Buggy - Complete Beginner",

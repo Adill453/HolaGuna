@@ -2,42 +2,46 @@
 
 import { useState, useEffect } from "react"
 import { Navigation } from "@/components/navigation"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
-import { Badge } from "@/components/ui/badge"
 import { Skeleton } from "@/components/ui/skeleton"
-import { Clock, Users, Award, BookOpen } from "lucide-react"
-import { BookingModal } from "@/components/booking-modal"
+import { BookOpen } from "lucide-react"
+import { CourseCategoryCard } from "@/components/course-category-card"
+import { Card, CardContent, CardHeader } from "@/components/ui/card"
+import { Award, Users, Clock } from "lucide-react"
 
-interface Course {
+interface Package {
+  id: number
+  hours: number
+  price: number
+  isActive: boolean
+}
+
+interface CourseCategory {
   id: number
   name: string
-  description: string
-  price: number
-  durationHours: number
-  maxParticipants: number
+  description: string | null
   imageUrl: string | null
+  packages: Package[]
 }
 
 export default function CoursesPage() {
-  const [courses, setCourses] = useState<Course[]>([])
+  const [categories, setCategories] = useState<CourseCategory[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
 
   useEffect(() => {
-    fetchCourses()
+    fetchCategories()
   }, [])
 
-  const fetchCourses = async () => {
+  const fetchCategories = async () => {
     try {
-      const response = await fetch("/api/courses")
+      const response = await fetch("/api/courses/categories")
       if (!response.ok) {
-        throw new Error("Failed to fetch courses")
+        throw new Error("Failed to fetch course categories")
       }
       const data = await response.json()
-      setCourses(data.courses)
+      setCategories(data)
     } catch (err) {
-      setError("Unable to load courses")
+      setError("Unable to load course categories")
     } finally {
       setLoading(false)
     }
@@ -92,62 +96,20 @@ export default function CoursesPage() {
           ) : error ? (
             <div className="text-center py-12">
               <p className="text-muted-foreground text-lg">{error}</p>
-              <Button onClick={fetchCourses} className="mt-4">
+              <button onClick={fetchCategories} className="mt-4 px-4 py-2 bg-primary text-primary-foreground rounded-md">
                 Try Again
-              </Button>
+              </button>
             </div>
-          ) : courses.length === 0 ? (
+          ) : categories.length === 0 ? (
             <div className="text-center py-12">
               <BookOpen className="h-16 w-16 text-muted-foreground mx-auto mb-4" />
-              <h3 className="text-xl font-semibold mb-2">No Courses Available</h3>
+              <h3 className="text-xl font-semibold mb-2">No Course Categories Available</h3>
               <p className="text-muted-foreground">Check back soon for new course offerings!</p>
             </div>
           ) : (
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {courses.map((course) => (
-                <Card key={course.id} className="group hover:shadow-lg transition-shadow">
-                  <div className="relative overflow-hidden rounded-lg">
-                    <img
-                      src={course.imageUrl || "/placeholder.svg?height=300&width=400"}
-                      alt={course.name}
-                      className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
-                    />
-                    <div className="absolute top-4 right-4">
-                      <Badge variant="secondary" className="bg-background/90 text-foreground">
-                        €{course.price}
-                      </Badge>
-                    </div>
-                  </div>
-
-                  <CardHeader>
-                    <CardTitle className="flex items-center gap-2">
-                      <Award className="h-5 w-5 text-primary" />
-                      {course.name}
-                    </CardTitle>
-                    <CardDescription className="text-pretty">{course.description}</CardDescription>
-                  </CardHeader>
-
-                  <CardContent className="space-y-4">
-                    <div className="flex items-center justify-between text-sm text-muted-foreground">
-                      <div className="flex items-center gap-1">
-                        <Clock className="h-4 w-4" />
-                        <span>{course.durationHours}h lesson</span>
-                      </div>
-                      <div className="flex items-center gap-1">
-                        <Users className="h-4 w-4" />
-                        <span>Max {course.maxParticipants}</span>
-                      </div>
-                    </div>
-
-                    <div className="flex items-center justify-between">
-                      <div>
-                        <p className="text-2xl font-bold text-primary">€{course.price}</p>
-                        <p className="text-xs text-muted-foreground">per person</p>
-                      </div>
-                      <BookingModal courseId={course.id} courseName={course.name} />
-                    </div>
-                  </CardContent>
-                </Card>
+              {categories.map((category) => (
+                <CourseCategoryCard key={category.id} category={category} />
               ))}
             </div>
           )}

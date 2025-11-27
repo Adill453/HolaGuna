@@ -47,6 +47,33 @@ model Course {
   @@map("courses")
 }
 
+model CourseCategory {
+  id          Int             @id @default(autoincrement())
+  name        String
+  description String?
+  imageUrl    String?         @map("image_url")
+  packages    CoursePackage[]
+  createdAt   DateTime        @default(now()) @map("created_at")
+  updatedAt   DateTime        @updatedAt @map("updated_at")
+
+  @@map("course_categories")
+}
+
+model CoursePackage {
+  id         Int            @id @default(autoincrement())
+  hours      Int
+  price      Float
+  categoryId Int            @map("category_id")
+  isActive   Boolean        @default(true) @map("is_active")
+  category   CourseCategory @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  createdAt  DateTime       @default(now()) @map("created_at")
+  updatedAt  DateTime       @updatedAt @map("updated_at")
+
+  bookings Booking[]
+
+  @@map("course_packages")
+}
+
 model Activity {
   id                Int      @id @default(autoincrement())
   name              String
@@ -95,6 +122,7 @@ model Booking {
   id           Int           @id @default(autoincrement())
   userId       Int           @map("user_id")
   courseId     Int?          @map("course_id")
+  packageId    Int?          @map("package_id")
   activityId   Int?          @map("activity_id")
   bookingDate  DateTime      @map("booking_date")
   bookingTime  String        @map("booking_time")
@@ -105,9 +133,10 @@ model Booking {
   createdAt    DateTime      @default(now()) @map("created_at")
   updatedAt    DateTime      @updatedAt @map("updated_at")
 
-  user     User      @relation(fields: [userId], references: [id])
-  course   Course?   @relation(fields: [courseId], references: [id])
-  activity Activity? @relation(fields: [activityId], references: [id])
+  user     User          @relation(fields: [userId], references: [id])
+  course   Course?       @relation(fields: [courseId], references: [id])
+  package  CoursePackage? @relation(fields: [packageId], references: [id])
+  activity Activity?     @relation(fields: [activityId], references: [id])
 
   @@map("bookings")
 }

@@ -4,26 +4,56 @@ import { prisma } from "@/lib/prisma"
 export async function POST(request: Request) {
   try {
     const body = await request.json()
-    const { courseId, date, time, name, phone, participants, notes } = body
+    const { courseId, packageId, date, time, name, phone, participants, notes } = body
 
     // Validation basique
-    if (!courseId || !date || !name || !phone || !time) {
+    if ((!courseId && !packageId) || !date || !name || !phone || !time) {
       return NextResponse.json(
         { error: "Informations manquantes" },
         { status: 400 }
       )
     }
 
-    // Vérifier si le cours existe
-    const course = await prisma.course.findUnique({
-      where: { id: courseId },
-    })
+    let totalPrice = 0
+    let course = null
+    let packageData = null
 
-    if (!course) {
-      return NextResponse.json(
-        { error: "Cours non trouvé" },
-        { status: 404 }
-      )
+    // Si packageId est fourni, utiliser le package
+    if (packageId) {
+      packageData = await prisma.coursePackage.findUnique({
+        where: { id: packageId },
+        include: { category: true },
+      })
+
+      if (!packageData) {
+        return NextResponse.json(
+          { error: "Package non trouvé" },
+          { status: 404 }
+        )
+      }
+
+      if (!packageData.isActive) {
+        return NextResponse.json(
+          { error: "Ce package n'est plus disponible" },
+          { status: 400 }
+        )
+      }
+
+      totalPrice = packageData.price * (participants || 1)
+    } else if (courseId) {
+      // Fallback vers l'ancien système de cours
+      course = await prisma.course.findUnique({
+        where: { id: courseId },
+      })
+
+      if (!course) {
+        return NextResponse.json(
+          { error: "Cours non trouvé" },
+          { status: 404 }
+        )
+      }
+
+      totalPrice = course.price * (participants || 1)
     }
 
     // Créer ou récupérer l'utilisateur
@@ -44,14 +74,12 @@ export async function POST(request: Request) {
       })
     }
 
-    // Calculer le prix total
-    const totalPrice = course.price * (participants || 1)
-
     // Créer la réservation
     const booking = await prisma.booking.create({
       data: {
         userId: user.id,
-        courseId,
+        courseId: courseId || null,
+        packageId: packageId || null,
         bookingDate: new Date(date),
         bookingTime: time,
         participants: participants || 1,
@@ -61,6 +89,11 @@ export async function POST(request: Request) {
       },
       include: {
         course: true,
+        package: {
+          include: {
+            category: true,
+          },
+        },
         user: {
           select: {
             name: true,
@@ -93,7 +126,12 @@ export async function GET() {
             phone: true
           }
         },
-        course: true
+        course: true,
+        package: {
+          include: {
+            category: true,
+          },
+        },
       },
       orderBy: {
         createdAt: 'desc'

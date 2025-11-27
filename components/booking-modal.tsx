@@ -18,23 +18,43 @@ const timeSlots = [
   "16:00"
 ]
 
-interface BookingModalProps {
-  courseId: number
-  courseName: string
+interface Package {
+  id: number
+  hours: number
+  price: number
+  isActive: boolean
 }
 
-export function BookingModal({ courseId, courseName }: BookingModalProps) {
+interface BookingModalProps {
+  courseId?: number
+  courseName?: string
+  categoryId?: number
+  categoryName?: string
+  packages?: Package[]
+}
+
+export function BookingModal({ 
+  courseId, 
+  courseName, 
+  categoryId, 
+  categoryName,
+  packages = []
+}: BookingModalProps) {
   const { user } = useAuth()
   const { toast } = useToast()
   const [isOpen, setIsOpen] = useState(false)
   const [formData, setFormData] = useState({
     name: user?.name || "",
     phone: user?.phone || "",
-    time: "09:00", // Heure par défaut
+    time: "09:00",
     participants: 1,
     message: "",
+    packageId: packages.length > 0 ? packages[0].id : undefined,
   })
   const [loading, setLoading] = useState(false)
+  
+  const selectedPackage = packages.find((pkg) => pkg.id === formData.packageId)
+  const displayName = categoryName || courseName || "Course"
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -47,6 +67,15 @@ export function BookingModal({ courseId, courseName }: BookingModalProps) {
       return
     }
 
+    if (!formData.packageId && !courseId) {
+      toast({
+        variant: "destructive",
+        title: "Package requis",
+        description: "Veuillez sélectionner un package.",
+      })
+      return
+    }
+
     setLoading(true)
     try {
       const response = await fetch("/api/bookings", {
@@ -54,6 +83,7 @@ export function BookingModal({ courseId, courseName }: BookingModalProps) {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           courseId,
+          packageId: formData.packageId,
           date: new Date().toISOString(),
           time: formData.time,
           name: formData.name,
@@ -88,7 +118,7 @@ export function BookingModal({ courseId, courseName }: BookingModalProps) {
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px] max-h-[90vh] overflow-y-auto">
         <DialogHeader>
-          <DialogTitle>Réserver {courseName}</DialogTitle>
+          <DialogTitle>Réserver {displayName}</DialogTitle>
           <DialogDescription>
             {user
               ? "Remplissez les détails ci-dessous pour réserver votre cours."
@@ -98,6 +128,36 @@ export function BookingModal({ courseId, courseName }: BookingModalProps) {
 
         <form onSubmit={handleSubmit} className="space-y-4 pb-4">
           <div className="grid gap-4 py-4">
+            {packages.length > 0 && (
+              <div className="grid grid-cols-4 items-center gap-4">
+                <Label htmlFor="package" className="text-right">
+                  Package
+                </Label>
+                <Select
+                  value={formData.packageId?.toString()}
+                  onValueChange={(value) => setFormData({ ...formData, packageId: parseInt(value, 10) })}
+                >
+                  <SelectTrigger className="col-span-3">
+                    <SelectValue placeholder="Choisir un package" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {packages.filter((pkg) => pkg.isActive).map((pkg) => (
+                      <SelectItem key={pkg.id} value={pkg.id.toString()}>
+                        {pkg.hours}H - €{pkg.price}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
+            )}
+            {selectedPackage && (
+              <div className="grid grid-cols-4 items-center gap-4">
+                <Label className="text-right">Prix total</Label>
+                <div className="col-span-3 text-lg font-semibold text-primary">
+                  €{selectedPackage.price * (formData.participants || 1)}
+                </div>
+              </div>
+            )}
             <div className="grid grid-cols-4 items-center gap-4">
               <Label htmlFor="name" className="text-right">
                 Nom
