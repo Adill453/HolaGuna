@@ -16,7 +16,7 @@ export const metadata: Metadata = {
   },
   title: "Ola Y Lagona",
   description:
-    "Experience the best kitesurfing, kite buggy, landboarding and paddleboard lessons in Dakhla, Morocco. Professional instructors and equipment.",
+    "Experience the best kitesurfing , kite buggy , landboarding and paddleboard lessons in Dakhla, Morocco. Professional instructors and equipment.",
 }
 
 export default function RootLayout({
