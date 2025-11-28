@@ -59,6 +59,7 @@ async function main() {
           { hours: 8, price: 385.0, isActive: true },
           { hours: 10, price: 450.0, isActive: true },
           { hours: 12, price: 520.0, isActive: true },
+          { hours: +1, price: 35.0, isActive: true },
         ],
       },
     },
@@ -78,6 +79,7 @@ async function main() {
           { hours: 8, price: 575.0, isActive: true },
           { hours: 10, price: 680.0, isActive: true },
           { hours: 12, price: 780.0, isActive: true },
+          { hours: +1, price: 60.0, isActive: true },
         ],
       },
     },
@@ -157,7 +159,7 @@ async function main() {
     data: {
       name: "Landboard BEGINNER",
       description: "For persons been flying a 4 line for few years",
-      imageUrl: "/mountain board-3.webp",
+      imageUrl: "/land board-3.webp",
       packages: {
         create: [
           { 
@@ -200,12 +202,12 @@ async function main() {
         imageUrl: "/buggy-4.webp",
       },
       {
-        name: "Mountain Boarding",
+        name: "Land Boarding",
         description: "Learn the art of landboarding with our expert instructors and top-notch equipment.",
         price: 60.0,
         durationHours: 2,
         equipmentIncluded: true,
-        imageUrl: "/mountain board-3.webp",
+        imageUrl: "/land board-3.webp",
       },
     ],
     //skipDuplicates: true,
@@ -272,31 +274,31 @@ async function main() {
       },
 
       {
-        title: "Mountain boarding",
+        title: "Land boarding",
         description: "Professional landboarding techniques",
-        imageUrl: "/mountain board-1.webp",
-        category: "MOUNTAIN_BOARD",
+        imageUrl: "/land board-1.webp",
+        category: "LAND_BOARD",
         isFeatured: true,
       },
       {
-        title: "Mountain boarding",
+        title: "Land boarding",
         description: "Professional landboarding techniques",
-        imageUrl: "/mountain board-2.webp",
-        category: "MOUNTAIN_BOARD",
+        imageUrl: "/land board-2.webp",
+        category: "LAND_BOARD",
         isFeatured: false,
       },
       {
-        title: "Mountain boarding",
+        title: "Land boarding",
         description: "Professional landboarding techniques",
-        imageUrl: "/mountain board-3.webp",
-        category: "MOUNTAIN_BOARD",
+        imageUrl: "/land board-3.webp",
+        category: "LAND_BOARD",
         isFeatured: true,
       },
       {
-        title: "Mountain boarding",
+        title: "Land boarding",
         description: "Professional landboarding techniques",
-        imageUrl: "/mountain board-4.webp",
-        category: "MOUNTAIN_BOARD",
+        imageUrl: "/land board-4.webp",
+        category: "LAND_BOARD",
         isFeatured: false,
       },
       

@@ -150,8 +150,8 @@ enum Role {
 enum GalleryCategory {
   KITESURFING    @map("kitesurfing")
   BUGGY          @map("buggy")
-  MOUNTAIN_BOARD @map("MOUNTAIN_BOARD")
-  STANDUP_PADDLE @map("STANDUP_PADDLE")
+  LAND_BOARD @map("land_board")
+  STANDUP_PADDLE @map("standup_paddle")
 }
 
 enum ContactStatus {
@@ -171,7 +171,7 @@ enum BookingStatus {
 enum CourseType {
   KITESURFING    @map("kitesurfing")
   BUGGY          @map("buggy")
-  MOUNTAIN_BOARD @map("mountain_board")
+  LAND_BOARD @map("land_board")
   STANDUP_PADDLE @map("standup_paddle")
 }
 

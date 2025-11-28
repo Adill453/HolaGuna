@@ -109,7 +109,7 @@ export default function CoursesPage() {
             </div>
           ) : (
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {categories.map((category) => (
+              {categories.sort((a, b) => a.id - b.id).map((category) => (
                 <CourseCategoryCard key={category.id} category={category} />
               ))}
             </div>
@@ -118,7 +118,7 @@ export default function CoursesPage() {
       </section>
 
       {/* Why Choose Our Courses */}
-      <section className="py-16 bg-card/50">
+      <section className="py-8 bg-card/50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center space-y-4 mb-12">
             <h2 className="text-3xl lg:text-4xl font-bold">Why Choose Our Courses?</h2>

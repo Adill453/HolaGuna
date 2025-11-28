@@ -7,7 +7,7 @@ import WindguruOfficialEmbed from "@/components/WindguruOfficialEmbed";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import Link from "next/link"
-import { Wind, Users, MapPin, Star, Award, Shield, Clock, Phone, Mail } from "lucide-react"
+import { Wind, Users, MapPin, Star, Award, Shield, Clock, Phone, Mail, Languages } from "lucide-react"
 
 interface GalleryItem {
   id: number
@@ -219,25 +219,25 @@ export default function HomePage() {
                 title: "Kitesurfing",
                 description: "Ride the waves with power and grace",
                 image: "/kitesurfing-3.webp",
-                price: "From €70",
+
               },
               {
                 title: "Buggy",
                 description: "Land-based thrills on three wheels",
                 image: "/buggy-3.webp",
-                price: "From €80",
+
               },
               {
-                title: "Mountain Board",
+                title: "Land Board",
                 description: "All-terrain kiteboarding excitement",
                 image: "/mountain board-2.webp",
-                price: "From €80",
+
               },
               {
                 title: "Standup Paddle",
                 description: "Paddle and glide across calm waters",
                 image: "/standup paddle-1.webp",
-                price: "From €40",
+
               },
             ].map((sport, index) => (
               <div className="group hover:shadow-lg transition-shadow">
@@ -247,9 +247,6 @@ export default function HomePage() {
                     alt={sport.title}
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                   />
-                  <div className="absolute top-4 right-4">
-                    <Badge variant="secondary">{sport.price}</Badge>
-                  </div>
                   <div className="absolute bottom-1 left-1 right-1 
                               group-hover:bg-black/50 backdrop-blur-xs text-white
                                 px-4 pt-2 pb-2 rounded-xl">
@@ -293,16 +290,14 @@ export default function HomePage() {
             {[
               {
                 name: "Ayoub Drissi",
-                role: "surf instructor Iko certificate level 2",
-                experience: "7+ years",
-                specialties: ["Kitesurfing"],
+                specialtie: "Kitesurf instructor IKO Certificate",
+                Languages: ["English", "French", "Spanish"],
                 image: "/instructor-AyoubDrissi.webp",
               },
               {
                 name: "Oussama Haddach",
-                role: "Kitesurf, wingfoil instructor IKO CERTIFICATE LEVEL 2",
-                experience: "3+ years",
-                specialties: ["Kitesurfing", "Wing Foil"],
+                specialtie: "Kitesurf instructor IKO Certificate",
+                Languages: ["English", "French"],
                 image: "/instructor-OussamaHaddach.webp",
               },
             ].map((member, index) => (
@@ -316,18 +311,16 @@ export default function HomePage() {
                     />
                   </div>
                   <h3 className="text-xl font-semibold mb-1">{member.name}</h3>
-                  <p className="text-primary font-medium mb-2">{member.role}</p>
-                  {/* <div className="flex items-center justify-center gap-2 mb-3">
-                    <Clock className="h-4 w-4 text-muted-foreground" />
-                    <span className="text-sm text-muted-foreground">{member.experience}</span>
-                  </div> */}
+                  <p className="text-primary font-medium mb-2">{member.specialtie}</p>
                   <div className="flex flex-wrap gap-1 justify-center">
-                    {member.specialties.map((specialty, idx) => (
+                    {member.Languages.map((Language, idx) => (
                       <Badge key={idx} variant="outline" className="text-xs">
-                        {specialty}
+                        {Language}
                       </Badge>
                     ))}
                   </div>
+                  
+                  
                 </CardContent>
               </Card>
             ))}
@@ -353,7 +346,7 @@ export default function HomePage() {
               {
                 name: "Emma Thompson",
                 location: "London, UK",
-                rating: 5,
+                rating: 4,
                 review:
                   "Absolutely incredible experience! The instructors were patient and professional. Dakhla is the perfect place to learn kitesurfing.",
                 course: "Beginner Kitesurfing",
@@ -425,7 +418,7 @@ export default function HomePage() {
         rounded-xl overflow-hidden shadow-2xl ring-1 ring-white/10
       "
           >
-            
+
             {/* text over the video */}
             <div className="absolute inset-0 flex items-end sm:items-center">
               <div className="w-full sm:max-w-lg px-4 sm:px-6 lg:px-8 pb-4 sm:py-8 text-white">
@@ -519,7 +512,7 @@ export default function HomePage() {
               <div className="space-y-2 text-sm">
                 <p className="text-muted-foreground">KITESURFING </p>
                 <p className="text-muted-foreground">BUGGY</p>
-                <p className="text-muted-foreground">MOUNTAIN BOARD </p>
+                <p className="text-muted-foreground">LAND BOARD </p>
                 <p className="text-muted-foreground">STANDUP PADDLE</p>
               </div>
             </div>

@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { Skeleton } from "@/components/ui/skeleton"
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog"
-import { Camera, Filter, Star, ChevronLeft, ChevronRight, Play, Pause, X } from "lucide-react"
+import { Filter, Star, ChevronLeft, ChevronRight, Play, Pause, X } from "lucide-react"
 
 interface GalleryItem {
   id: number
@@ -22,7 +22,7 @@ const categories = [
   { value: "all", label: "All Photos" },
   { value: "KITESURFING", label: "Kitesurfing" },
   { value: "BUGGY", label: "Buggy" },
-  { value: "MOUNTAIN_BOARD", label: "Mountain Board" },
+  { value: "LAND_BOARD", label: "Land board" },
   { value: "STANDUP_PADDLE", label: "Standup Paddle" },
 ]
 
