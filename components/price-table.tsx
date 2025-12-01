@@ -46,7 +46,7 @@ export function PriceTable({ packages }: PriceTableProps) {
           </TableRow>
         </TableHeader>
         <TableBody>
-          {activePackages.map((pkg) => (
+          {activePackages.sort((a, b) => a.id - b.id).map((pkg) => (
             <TableRow key={pkg.id}>
               <TableCell className="font-medium">{pkg.hours}H</TableCell>
               {hasDescriptions && (

@@ -155,9 +155,9 @@ export default function ActivitiesPage() {
                     {/* Bottom content */}
                     <div className="absolute bottom-0 left-0 right-0 
                               group-hover:bg-black/50 backdrop-blur-xs text-white
-                                px-4 pt-3 pb-4 
+                                px-4 pt-3 pb-2 
                                 transition-all duration-300 
-                                max-h-20 group-hover:max-h-40 
+                                
                                 overflow-hidden
                                 rounded-t-xl">
 
@@ -171,7 +171,7 @@ export default function ActivitiesPage() {
                       </CardDescription>
 
                       {/* Booking button - only visible on hover */}
-                      <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 mt-3">
+                      <div className="justify-self-end">
                         {renderBookingButton(activity)}
                       </div>
 

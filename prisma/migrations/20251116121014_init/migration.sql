@@ -2,7 +2,7 @@
 CREATE TYPE "Role" AS ENUM ('admin', 'client');
 
 -- CreateEnum
-CREATE TYPE "GalleryCategory" AS ENUM ('kitesurfing', 'buggy', 'MOUNTAIN_BOARD', 'STANDUP_PADDLE');
+CREATE TYPE "GalleryCategory" AS ENUM ('kitesurfing', 'buggy', 'land_board', 'standup_paddle');
 
 -- CreateEnum
 CREATE TYPE "ContactStatus" AS ENUM ('new', 'read', 'replied');
@@ -11,7 +11,7 @@ CREATE TYPE "ContactStatus" AS ENUM ('new', 'read', 'replied');
 CREATE TYPE "BookingStatus" AS ENUM ('pending', 'confirmed', 'cancelled', 'completed', 'deleted');
 
 -- CreateEnum
-CREATE TYPE "CourseType" AS ENUM ('kitesurfing', 'buggy', 'mountain_board', 'standup_paddle');
+CREATE TYPE "CourseType" AS ENUM ('kitesurfing', 'buggy', 'land_board', 'standup_paddle');
 
 -- CreateEnum
 CREATE TYPE "PricingTier" AS ENUM ('group', 'semi_private', 'private');

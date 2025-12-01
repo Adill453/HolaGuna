@@ -230,7 +230,7 @@ export default function HomePage() {
               {
                 title: "Land Board",
                 description: "All-terrain kiteboarding excitement",
-                image: "/mountain board-2.webp",
+                image: "/land board-2.webp",
 
               },
               {
@@ -248,7 +248,7 @@ export default function HomePage() {
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                   />
                   <div className="absolute bottom-1 left-1 right-1 
-                              group-hover:bg-black/50 backdrop-blur-xs text-white
+                              group-hover:bg-black/50 duration-300 backdrop-blur-xs text-white
                                 px-4 pt-2 pb-2 rounded-xl">
                     <CardTitle className="flex items-center gap-2 ">
                       <img src="/logo.png" alt="Ola Y Lagona" className="h-5 w-5" />
