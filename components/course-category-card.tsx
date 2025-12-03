@@ -42,9 +42,9 @@ export function CourseCategoryCard({ category }: CourseCategoryCardProps) {
       }}
     >
       {/* Blur Overlay */}
-      <div className="absolute inset-0 backdrop-blur-sm bg-black/50"></div>
-
-      Top Badge
+      <div className="absolute inset-0 bg-black/50"></div>
+      <br />
+      {/* Top Badge */}
       {cheapestPackage && (
         <div className="absolute top-4 right-4 z-20">
           <Badge variant="secondary" className="bg-background/90 text-foreground">
@@ -68,7 +68,7 @@ export function CourseCategoryCard({ category }: CourseCategoryCardProps) {
             </CardDescription>
           )}
           <PriceTable packages={category.packages} />
-           
+
           <div className="flex justify-end pt-2">
             <BookingModal
               categoryId={category.id}

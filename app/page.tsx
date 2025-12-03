@@ -230,7 +230,8 @@ export default function HomePage() {
               {
                 title: "Land Board",
                 description: "All-terrain kiteboarding excitement",
-                image: "/land board-2.webp",
+                image: "/landboard-2.webp",
+
 
               },
               {
@@ -244,6 +245,10 @@ export default function HomePage() {
                 <div className="relative overflow-hidden rounded-lg ">
                   <img
                     src={sport.image || "/placeholder.svg"}
+                    onError={(e) => {
+                      const img = e.currentTarget as HTMLImageElement;
+                      img.setAttribute("src", "/placeholder.svg");
+                    }}
                     alt={sport.title}
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                   />
@@ -319,8 +324,8 @@ export default function HomePage() {
                       </Badge>
                     ))}
                   </div>
-                  
-                  
+
+
                 </CardContent>
               </Card>
             ))}

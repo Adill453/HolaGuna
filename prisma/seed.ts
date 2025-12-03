@@ -159,7 +159,7 @@ async function main() {
     data: {
       name: "Landboard BEGINNER",
       description: "For persons been flying a 4 line for few years",
-      imageUrl: "/land board-3.webp",
+      imageUrl: "/landboard-3.webp",
       packages: {
         create: [
           { 
@@ -207,7 +207,7 @@ async function main() {
         price: 60.0,
         durationHours: 2,
         equipmentIncluded: true,
-        imageUrl: "/land board-3.webp",
+        imageUrl: "/landboard-3.webp",
       },
     ],
     //skipDuplicates: true,
@@ -276,28 +276,28 @@ async function main() {
       {
         title: "Land boarding",
         description: "Professional landboarding techniques",
-        imageUrl: "/land board-1.webp",
+        imageUrl: "/landboard-1.webp",
         category: "LAND_BOARD",
         isFeatured: true,
       },
       {
         title: "Land boarding",
         description: "Professional landboarding techniques",
-        imageUrl: "/land board-2.webp",
+        imageUrl: "/landboard-2.webp",
         category: "LAND_BOARD",
         isFeatured: false,
       },
       {
         title: "Land boarding",
         description: "Professional landboarding techniques",
-        imageUrl: "/land board-3.webp",
+        imageUrl: "/landboard-3.webp",
         category: "LAND_BOARD",
         isFeatured: true,
       },
       {
         title: "Land boarding",
         description: "Professional landboarding techniques",
-        imageUrl: "/land board-4.webp",
+        imageUrl: "/landboard-4.webp",
         category: "LAND_BOARD",
         isFeatured: false,
       },
@@ -330,6 +330,7 @@ async function main() {
         category: "STANDUP_PADDLE",
         isFeatured: false,
       },
+
     ],
     //skipDuplicates: true,
   })
