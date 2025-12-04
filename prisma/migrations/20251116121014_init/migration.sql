@@ -69,7 +69,6 @@ CREATE TABLE "activities" (
 CREATE TABLE "gallery" (
     "id" SERIAL NOT NULL,
     "title" TEXT NOT NULL,
-    "description" TEXT,
     "image_url" TEXT NOT NULL,
     "category" "GalleryCategory" NOT NULL,
     "is_featured" BOOLEAN NOT NULL DEFAULT false,

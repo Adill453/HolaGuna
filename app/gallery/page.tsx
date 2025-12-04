@@ -12,7 +12,6 @@ import { Filter, Star, ChevronLeft, ChevronRight, Play, Pause, X } from "lucide-
 interface GalleryItem {
   id: number
   title: string
-  description: string | null
   imageUrl: string
   category: string
   isFeatured: boolean
@@ -347,12 +346,12 @@ export default function GalleryPage() {
               className="w-full h-full rounded-lg object-cover"
             />
 
-            {/* Description Overlay */}
-            {gallery[currentImageIndex]?.description && (
+            {/* Title Overlay */}
+            {gallery[currentImageIndex]?.title && (
               <div className="absolute inset-0 bg-black/0 group-hover:bg-black/60 transition-all duration-300 rounded-lg flex items-end justify-center">
                 <div className="w-full p-4 transform translate-y-full group-hover:translate-y-0 transition-transform duration-300">
                   <p className="text-white text-sm text-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    {gallery[currentImageIndex]?.description}
+                    {gallery[currentImageIndex]?.title}
                   </p>
                 </div>
               </div>
