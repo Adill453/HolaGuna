@@ -57,7 +57,7 @@ export default function HomePage() {
     }
   }
 
-  const fallbackImage = "/kitesurfing-1.webp"
+  const fallbackImage = "/images/kitesurfing-1.jpg"
 
   return (
     <div className="min-h-screen bg-background">
@@ -218,26 +218,26 @@ export default function HomePage() {
               {
                 title: "Kitesurfing",
                 description: "Ride the waves with power and grace",
-                image: "/kitesurfing-3.webp",
+                image: "/images/kitesurfing-3.jpg",
 
               },
               {
                 title: "Buggy",
                 description: "Land-based thrills on three wheels",
-                image: "/buggy-3.webp",
+                image: "/images/buggy-3.jpg",
 
               },
               {
                 title: "Land Board",
                 description: "All-terrain kiteboarding excitement",
-                image: "/landboard-2.webp",
+                image: "/images/landboard-2.jpg",
 
 
               },
               {
                 title: "Standup Paddle",
                 description: "Paddle and glide across calm waters",
-                image: "/standup paddle-1.webp",
+                image: "/images/standuppaddle-1.jpg",
 
               },
             ].map((sport, index) => (

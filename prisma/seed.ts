@@ -30,7 +30,7 @@ async function main() {
     data: {
       name: "kitesurfing Group",
       description: "Learn kitesurfing in a group setting with up to 8 participants. Perfect for learning with others and making new friends.",
-      imageUrl: "/kitesurfing-2.webp",
+      imageUrl: "/images/kitesurfing-2.jpg",
       packages: {
         create: [
           { hours: 2, price: 70.0, isActive: true },
@@ -50,7 +50,7 @@ async function main() {
     data: {
       name: "kitesurfing Semi-Private",
       description: "Semi-private lessons with smaller groups (up to 3 participants). Get more personalized attention while still enjoying the group dynamic.",
-      imageUrl: "/kitesurfing-3.webp",
+      imageUrl: "/images/kitesurfing-3.jpg",
       packages: {
         create: [
           { hours: 2, price: 110.0, isActive: true },
@@ -70,7 +70,7 @@ async function main() {
     data: {
       name: "kitesurfing Private",
       description: "One-on-one private lessons with dedicated instructor attention. Perfect for accelerated learning and personalized instruction.",
-      imageUrl: "/kitesurfing-3.webp",
+      imageUrl: "/images/kitesurfing-3.jpg",
       packages: {
         create: [
           { hours: 2, price: 160.0, isActive: true },
@@ -90,7 +90,7 @@ async function main() {
     data: {
       name: "BUGGY COMBO LESSON",
       description: "For beginners & Includes first half of session completing a power kite lesson. AGE 12+",
-      imageUrl: "/buggy-2.webp",
+      imageUrl: "/images/buggy-2.jpg",
       packages: {
         create: [
           { 
@@ -113,7 +113,7 @@ async function main() {
     data: {
       name: "BUGGY BEGINNER",
       description: "Already completed our Power kite lesson Or been flying a 4 line for few years, here's your lesson. AGE 12+",
-      imageUrl: "/buggy-2.webp",
+      imageUrl: "/images/buggy-2.jpg",
       packages: {
         create: [
           { 
@@ -136,7 +136,7 @@ async function main() {
     data: {
       name: "Connected Buggy",
       description: "For the people who haven't abilities to fly a kite (handicaps, blinds...). Our option is a connected buggy behind the principle one controlled by one of our team. You just have to sit there and enjoy the sand dunes. (SAFETY FIRST)",
-      imageUrl: "/buggy-2.webp",
+      imageUrl: "/images/buggy-2.jpg",
       packages: {
         create: [
           { 
@@ -159,7 +159,7 @@ async function main() {
     data: {
       name: "Landboard BEGINNER",
       description: "For persons been flying a 4 line for few years",
-      imageUrl: "/landboard-3.webp",
+      imageUrl: "/images/landboard-3.jpg",
       packages: {
         create: [
           { 
@@ -183,7 +183,7 @@ async function main() {
         price: 50.0,
         durationHours: 2,
         equipmentIncluded: true,
-        imageUrl: "/standup paddle-1.webp",
+        imageUrl: "/images/standuppaddle-1.jpg",
       },
       {
         name: "Sunset Kitesurfing",
@@ -191,7 +191,7 @@ async function main() {
         price: 150.0,
         durationHours: 2,
         equipmentIncluded: true,
-        imageUrl: "/kitesurfing-4.webp",
+        imageUrl: "/images/kitesurfing-4.jpg",
       },
       {
         name: "Buggy Adventure",
@@ -199,7 +199,7 @@ async function main() {
         price: 80.0,
         durationHours: 1,
         equipmentIncluded: true,
-        imageUrl: "/buggy-4.webp",
+        imageUrl: "/images/buggy-4.jpg",
       },
       {
         name: "Land Boarding",
@@ -207,7 +207,7 @@ async function main() {
         price: 60.0,
         durationHours: 2,
         equipmentIncluded: true,
-        imageUrl: "/landboard-3.webp",
+        imageUrl: "/images/landboard-3.jpg",
       },
     ],
     //skipDuplicates: true,
@@ -218,102 +218,344 @@ async function main() {
     data: [
       {
         title: "Epic Kitesurfing Session",
-        imageUrl: "/kitesurfing-1.webp",
+        imageUrl: "/images/kitesurfing-1.jpg",
         category: "KITESURFING",
         isFeatured: true,
       },
       {
         title: "Epic Kitesurfing Session",
-        imageUrl: "/kitesurfing-2.webp",
+        imageUrl: "/images/kitesurfing-2.jpg",
         category: "KITESURFING",
         isFeatured: false,
       },
       {
         title: "Epic Kitesurfing Session",
-        imageUrl: "/kitesurfing-3.webp",
+        imageUrl: "/images/kitesurfing-3.jpg",
         category: "KITESURFING",
         isFeatured: false,
       },
       {
         title: "Epic Kitesurfing Session",
-        imageUrl: "/kitesurfing-4.webp",
+        imageUrl: "/images/kitesurfing-4.jpg",
         category: "KITESURFING",
         isFeatured: true,
       },
       {
+        title: "Epic Kitesurfing Session",
+        imageUrl: "/images/kitesurfing-5.jpg",
+        category: "KITESURFING",
+        isFeatured: true,
+      },
+      {
+        title: "Epic Kitesurfing Session",
+        imageUrl: "/images/kitesurfing-6.jpg",
+        category: "KITESURFING",
+        isFeatured: false,
+      },
+      {
+        title: "Epic Kitesurfing Session",
+        imageUrl: "/images/kitesurfing-7.jpg",
+        category: "KITESURFING",
+        isFeatured: false,
+      },
+      {
+        title: "Epic Kitesurfing Session",
+        imageUrl: "/images/kitesurfing-8.jpg",
+        category: "KITESURFING",
+        isFeatured: true,
+      },
+      {
+        title: "Epic Kitesurfing Session",
+        imageUrl: "/images/kitesurfing-9.jpg",
+        category: "KITESURFING",
+        isFeatured: true,
+      },
+      {
+        title: "Epic Kitesurfing Session",
+        imageUrl: "/images/kitesurfing-10.jpg",
+        category: "KITESURFING",
+        isFeatured: false,
+      },
+      {
+        title: "Epic Kitesurfing Session",
+        imageUrl: "/images/kitesurfing-11.jpg",
+        category: "KITESURFING",
+        isFeatured: false,
+      },
+      {
+        title: "Epic Kitesurfing Session",
+        imageUrl: "/images/kitesurfing-12.jpg",
+        category: "KITESURFING",
+        isFeatured: true,
+      },
+      {
+        title: "Epic Kitesurfing Session",
+        imageUrl: "/images/kitesurfing-13.jpg",
+        category: "KITESURFING",
+        isFeatured: true,
+      },
+      {
+        title: "Epic Kitesurfing Session",
+        imageUrl: "/images/kitesurfing-14.jpg",
+        category: "KITESURFING",
+        isFeatured: false,
+      },
+      {
+        title: "Epic Kitesurfing Session",
+        imageUrl: "/images/kitesurfing-15.jpg",
+        category: "KITESURFING",
+        isFeatured: false,
+      },
+      {
+        title: "Epic Kitesurfing Session",
+        imageUrl: "/images/kitesurfing-16.jpg",
+        category: "KITESURFING",
+        isFeatured: true,
+      },
+      {
+        title: "Epic Kitesurfing Session",
+        imageUrl: "/images/kitesurfing-17.jpg",
+        category: "KITESURFING",
+        isFeatured: false,
+      },
+      {
+        title: "Epic Kitesurfing Session",
+        imageUrl: "/images/kitesurfing-18.jpg",
+        category: "KITESURFING",
+        isFeatured: false,
+      },
+      {
+        title: "Epic Kitesurfing Session",
+        imageUrl: "/images/kitesurfing-19.jpg",
+        category: "KITESURFING",
+        isFeatured: false,
+      },
+      {
+        title: "Epic Kitesurfing Session",
+        imageUrl: "/images/kitesurfing-20.jpg",
+        category: "KITESURFING",
+        isFeatured: true,
+      },
+      {
+        title: "Epic Kitesurfing Session",
+        imageUrl: "/images/kitesurfing-21.jpg",
+        category: "KITESURFING",
+        isFeatured: false,
+      },
+      {
+        title: "Epic Kitesurfing Session",
+        imageUrl: "/images/kitesurfing-22.jpg",
+        category: "KITESURFING",
+        isFeatured: true,
+      },
+
+      {
         title: "Buggy Fun",
-        imageUrl: "/buggy-1.webp",
+        imageUrl: "/images/buggy-1.jpg",
         category: "BUGGY",
         isFeatured: true,
       },
       {
         title: "Buggy Fun",
-        imageUrl: "/buggy-2.webp",
+        imageUrl: "/images/buggy-2.jpg",
         category: "BUGGY",
         isFeatured: false,
       },
       {
         title: "Buggy Fun",
-        imageUrl: "/buggy-3.webp",
+        imageUrl: "/images/buggy-3.jpg",
         category: "BUGGY",
         isFeatured: false,
       },
       {
         title: "Buggy Fun",
-        imageUrl: "/buggy-4.webp",
+        imageUrl: "/images/buggy-4.jpg",
+        category: "BUGGY",
+        isFeatured: true,
+      },
+      {
+        title: "Buggy Fun",
+        imageUrl: "/images/buggy-5.jpg",
+        category: "BUGGY",
+        isFeatured: true,
+      },
+      {
+        title: "Buggy Fun",
+        imageUrl: "/images/buggy-6.jpg",
+        category: "BUGGY",
+        isFeatured: false,
+      },
+      {
+        title: "Buggy Fun",
+        imageUrl: "/images/buggy-7.jpg",
+        category: "BUGGY",
+        isFeatured: false,
+      },
+      {
+        title: "Buggy Fun",
+        imageUrl: "/images/buggy-8.jpg",
+        category: "BUGGY",
+        isFeatured: true,
+      },
+      {
+        title: "Buggy Fun",
+        imageUrl: "/images/buggy-9.jpg",
+        category: "BUGGY",
+        isFeatured: true,
+      },
+      {
+        title: "Buggy Fun",
+        imageUrl: "/images/buggy-10.jpg",
+        category: "BUGGY",
+        isFeatured: false,
+      },
+      {
+        title: "Buggy Fun",
+        imageUrl: "/images/buggy-11.jpg",
+        category: "BUGGY",
+        isFeatured: false,
+      },
+      {
+        title: "Buggy Fun",
+        imageUrl: "/images/buggy-12.jpg",
+        category: "BUGGY",
+        isFeatured: true,
+      },
+      {
+        title: "Buggy Fun",
+        imageUrl: "/images/buggy-13.jpg",
+        category: "BUGGY",
+        isFeatured: true,
+      },
+      {
+        title: "Buggy Fun",
+        imageUrl: "/images/buggy-14.jpg",
+        category: "BUGGY",
+        isFeatured: false,
+      },
+      {
+        title: "Buggy Fun",
+        imageUrl: "/images/buggy-15.jpg",
+        category: "BUGGY",
+        isFeatured: false,
+      },
+      {
+        title: "Buggy Fun",
+        imageUrl: "/images/buggy-16.jpg",
         category: "BUGGY",
         isFeatured: true,
       },
 
       {
         title: "Land boarding",
-        imageUrl: "/landboard-1.webp",
+        imageUrl: "/images/landboard-1.jpg",
         category: "LAND_BOARD",
         isFeatured: true,
       },
       {
         title: "Land boarding",
-        imageUrl: "/landboard-2.webp",
+        imageUrl: "/images/landboard-2.jpg",
         category: "LAND_BOARD",
         isFeatured: false,
       },
       {
         title: "Land boarding",
-        imageUrl: "/landboard-3.webp",
+        imageUrl: "/images/landboard-3.jpg",
         category: "LAND_BOARD",
         isFeatured: true,
       },
       {
         title: "Land boarding",
-        imageUrl: "/landboard-4.webp",
+        imageUrl: "/images/landboard-4.jpg",
+        category: "LAND_BOARD",
+        isFeatured: false,
+      },
+      {
+        title: "Land boarding",
+        imageUrl: "/images/landboard-5.jpg",
+        category: "LAND_BOARD",
+        isFeatured: true,
+      },
+      {
+        title: "Land boarding",
+        imageUrl: "/images/landboard-6.jpg",
+        category: "LAND_BOARD",
+        isFeatured: false,
+      },
+      {
+        title: "Land boarding",
+        imageUrl: "/images/landboard-7.jpg",
+        category: "LAND_BOARD",
+        isFeatured: true,
+      },
+      {
+        title: "Land boarding",
+        imageUrl: "/images/landboard-8.jpg",
+        category: "LAND_BOARD",
+        isFeatured: false,
+      },
+      {
+        title: "Land boarding",
+        imageUrl: "/images/landboard-9.jpg",
         category: "LAND_BOARD",
         isFeatured: false,
       },
       
       {
         title: "Peaceful stand up paddleboarding",
-        imageUrl: "/standup paddle-1.webp",
+        imageUrl: "/images/standuppaddle-1.jpg",
         category: "STANDUP_PADDLE",
         isFeatured: true,
       },
       {
         title: "Peaceful stand up paddleboarding",
-        imageUrl: "/standup paddle-2.webp",
+        imageUrl: "/images/standuppaddle-2.jpg",
         category: "STANDUP_PADDLE",
         isFeatured: false,
       },
       {
         title: "Peaceful stand up paddleboarding",
-        imageUrl: "/standup paddle-3.webp",
+        imageUrl: "/images/standuppaddle-3.jpg",
         category: "STANDUP_PADDLE",
         isFeatured: false,
       },
       {
         title: "Peaceful stand up paddleboarding",
-        imageUrl: "/standup paddle-4.webp",
+        imageUrl: "/images/standuppaddle-4.jpg",
         category: "STANDUP_PADDLE",
         isFeatured: false,
       },
+      {
+        title: "Peaceful stand up paddleboarding",
+        imageUrl: "/images/standuppaddle-5.jpg",
+        category: "STANDUP_PADDLE",
+        isFeatured: true,
+      },
+      {
+        title: "Peaceful stand up paddleboarding",
+        imageUrl: "/images/standuppaddle-6.jpg",
+        category: "STANDUP_PADDLE",
+        isFeatured: false,
+      },
+      {
+        title: "Peaceful stand up paddleboarding",
+        imageUrl: "/images/standuppaddle-7.jpg",
+        category: "STANDUP_PADDLE",
+        isFeatured: false,
+      },
+      {
+        title: "Peaceful stand up paddleboarding",
+        imageUrl: "/images/standuppaddle-8.jpg",
+        category: "STANDUP_PADDLE",
+        isFeatured: false,
+      },
+      {
+        title: "Peaceful stand up paddleboarding",
+        imageUrl: "/images/standuppaddle-9.jpg",
+        category: "STANDUP_PADDLE",
+        isFeatured: false,
+      }
+
 
     ],
     //skipDuplicates: true,
