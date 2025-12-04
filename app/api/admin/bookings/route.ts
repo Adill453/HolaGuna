@@ -14,6 +14,11 @@ export async function GET() {
           }
         },
         course: true,
+        package: {
+          include: {
+            category: true
+          }
+        },
         activity: true
       },
       orderBy: {
@@ -56,6 +61,11 @@ export async function PATCH(request: Request) {
           }
         },
         course: true,
+        package: {
+          include: {
+            category: true
+          }
+        },
         activity: true
       }
     })

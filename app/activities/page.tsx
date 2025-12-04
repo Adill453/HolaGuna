@@ -16,6 +16,7 @@ interface Activity {
   price: number
   durationHours: number
   equipmentIncluded: boolean
+  activityType: string | null
   imageUrl: string | null
 }
 

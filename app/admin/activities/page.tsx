@@ -36,6 +36,7 @@ interface ActivityType {
   price: number
   durationHours: number
   equipmentIncluded: boolean
+  activityType: string | null
   imageUrl: string | null
   isActive: boolean
   createdAt: string
@@ -69,6 +70,7 @@ export default function AdminActivitiesPage() {
     price: "",
     duration_hours: "",
     equipment_included: false,
+    activity_type: "",
     image_url: "",
     is_active: true,
   })
@@ -176,6 +178,7 @@ export default function AdminActivitiesPage() {
       price: activity.price.toString(),
       duration_hours: activity.durationHours.toString(),
       equipment_included: activity.equipmentIncluded,
+      activity_type: activity.activityType || "",
       image_url: activity.imageUrl || "",
       is_active: activity.isActive,
     })
@@ -275,6 +278,7 @@ export default function AdminActivitiesPage() {
       price: "",
       duration_hours: "",
       equipment_included: false,
+      activity_type: "",
       image_url: "",
       is_active: true,
     })
@@ -359,16 +363,33 @@ export default function AdminActivitiesPage() {
                     required
                   />
                 </div>
-                <div className="flex items-center space-x-2 pt-6">
-                  <Checkbox
-                    id="equipment"
-                    checked={formData.equipment_included}
-                    onCheckedChange={(checked) => setFormData({ ...formData, equipment_included: checked as boolean })}
-                  />
-                  <label htmlFor="equipment" className="text-sm font-medium">
-                    Équipement inclus
-                  </label>
+                <div>
+                  <label className="text-sm font-medium">Type d'activité</label>
+                  <Select
+                    value={formData.activity_type}
+                    onValueChange={(value) => setFormData({ ...formData, activity_type: value })}
+                  >
+                    <SelectTrigger>
+                      <SelectValue placeholder="Sélectionner un type" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="KITESURFING">Kitesurfing</SelectItem>
+                      <SelectItem value="BUGGY">Buggy</SelectItem>
+                      <SelectItem value="LAND_BOARD">Land Board</SelectItem>
+                      <SelectItem value="STANDUP_PADDLE">Stand Up Paddle</SelectItem>
+                    </SelectContent>
+                  </Select>
                 </div>
+              </div>
+              <div className="flex items-center space-x-2">
+                <Checkbox
+                  id="equipment"
+                  checked={formData.equipment_included}
+                  onCheckedChange={(checked) => setFormData({ ...formData, equipment_included: checked as boolean })}
+                />
+                <label htmlFor="equipment" className="text-sm font-medium">
+                  Équipement inclus
+                </label>
               </div>
               <div>
                 <label className="text-sm font-medium">

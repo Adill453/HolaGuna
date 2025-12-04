@@ -76,16 +76,17 @@ model CoursePackage {
 }
 
 model Activity {
-  id                Int      @id @default(autoincrement())
+  id                Int         @id @default(autoincrement())
   name              String
   description       String
   price             Float
-  durationHours     Int      @map("duration_hours")
-  equipmentIncluded Boolean  @default(true) @map("equipment_included")
-  imageUrl          String?  @map("image_url")
-  isActive          Boolean  @default(true) @map("is_active")
-  createdAt         DateTime @default(now()) @map("created_at")
-  updatedAt         DateTime @updatedAt @map("updated_at")
+  durationHours     Int         @map("duration_hours")
+  equipmentIncluded Boolean     @default(true) @map("equipment_included")
+  activityType      CourseType? @map("activity_type")
+  imageUrl          String?      @map("image_url")
+  isActive          Boolean      @default(true) @map("is_active")
+  createdAt         DateTime     @default(now()) @map("created_at")
+  updatedAt         DateTime     @updatedAt @map("updated_at")
 
   bookings Booking[]
 

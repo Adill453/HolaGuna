@@ -59,10 +59,21 @@ interface Booking {
   course?: {
     id: number
     name: string
+    courseType: string
+  }
+  package?: {
+    id: number
+    hours: number
+    price: number
+    category: {
+      id: number
+      name: string
+    }
   }
   activity?: {
     id: number
     name: string
+    activityType: string | null
   }
   bookingDate: string
   bookingTime: string
@@ -163,6 +174,7 @@ export default function AdminBookingsPage() {
       booking.user.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
       booking.user.email.toLowerCase().includes(searchTerm.toLowerCase()) ||
       (booking.course?.name.toLowerCase().includes(searchTerm.toLowerCase())) ||
+      (booking.package?.category.name.toLowerCase().includes(searchTerm.toLowerCase())) ||
       (booking.activity?.name.toLowerCase().includes(searchTerm.toLowerCase()))
     
     const matchesStatus = statusFilter === "all" || booking.status === statusFilter
@@ -184,8 +196,8 @@ export default function AdminBookingsPage() {
         booking.user.name,
         booking.user.email,
         booking.user.phone || "",
-        booking.course ? "Cours" : "Activité",
-        booking.course?.name || booking.activity?.name || "",
+        (booking.course || booking.package) ? "Cours" : "Activité",
+        booking.course?.name || booking.package?.category.name || booking.activity?.name || "",
         format(new Date(booking.bookingDate), "dd/MM/yyyy", { locale: fr }),
         booking.bookingTime,
         booking.participants,
@@ -372,11 +384,26 @@ export default function AdminBookingsPage() {
                         <TableCell>
                           <div>
                             <div className="font-medium">
-                              {booking.course ? "Cours" : "Activité"}
+                              {(booking.course || booking.package) ? "Cours" : "Activité"}
                             </div>
                             <div className="text-sm text-muted-foreground">
-                              {booking.course?.name || booking.activity?.name}
+                              {booking.course?.name || booking.package?.category.name || booking.activity?.name}
                             </div>
+                            {booking.course?.courseType && (
+                              <div className="text-xs text-muted-foreground mt-1">
+                                Type: {booking.course.courseType}
+                              </div>
+                            )}
+                            {booking.package && (
+                              <div className="text-xs text-muted-foreground mt-1">
+                                Package: {booking.package.hours}h
+                              </div>
+                            )}
+                            {booking.activity?.activityType && (
+                              <div className="text-xs text-muted-foreground mt-1">
+                                Type: {booking.activity.activityType}
+                              </div>
+                            )}
                           </div>
                         </TableCell>
                         <TableCell>
@@ -495,8 +522,17 @@ export default function AdminBookingsPage() {
                 <div>
                   <h4 className="font-medium mb-2">Réservation</h4>
                   <div className="space-y-1 text-sm">
-                    <div><strong>Type:</strong> {selectedBooking.course ? "Cours" : "Activité"}</div>
-                    <div><strong>Nom:</strong> {selectedBooking.course?.name || selectedBooking.activity?.name}</div>
+                    <div><strong>Type:</strong> {(selectedBooking.course || selectedBooking.package) ? "Cours" : "Activité"}</div>
+                    <div><strong>Nom:</strong> {selectedBooking.course?.name || selectedBooking.package?.category.name || selectedBooking.activity?.name}</div>
+                    {selectedBooking.course?.courseType && (
+                      <div><strong>Type de cours:</strong> {selectedBooking.course.courseType}</div>
+                    )}
+                    {selectedBooking.package && (
+                      <div><strong>Package:</strong> {selectedBooking.package.hours}h - {selectedBooking.package.category.name}</div>
+                    )}
+                    {selectedBooking.activity?.activityType && (
+                      <div><strong>Type d'activité:</strong> {selectedBooking.activity.activityType}</div>
+                    )}
                     <div><strong>Participants:</strong> {selectedBooking.participants}</div>
                     <div><strong>Prix total:</strong> €{selectedBooking.totalPrice}</div>
                   </div>

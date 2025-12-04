@@ -26,6 +26,7 @@ export async function GET(
             description: true,
             price: true,
             duration_hours: true,
+            courseType: true,
           },
         },
         activity: {
@@ -35,6 +36,7 @@ export async function GET(
             description: true,
             price: true,
             duration_hours: true,
+            activityType: true,
           },
         },
       },
@@ -94,12 +96,14 @@ export async function PATCH(
           select: {
             id: true,
             name: true,
+            courseType: true,
           },
         },
         activity: {
           select: {
             id: true,
             name: true,
+            activityType: true,
           },
         },
       },

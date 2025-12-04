@@ -15,10 +15,10 @@ export async function PUT(request: NextRequest, { params }: { params: { id: stri
     //   return NextResponse.json({ error: "Forbidden" }, { status: 403 })
     // }
 
-    const { name, description, price, duration_hours, equipment_included, image_url, is_active } = await request.json()
+    const { name, description, price, duration_hours, equipment_included, activity_type, image_url, is_active } = await request.json()
     const activityId = Number.parseInt(params.id)
 
-    if (!name || !description || !price || !duration_hours) {
+    if (!name || !description || !price || !duration_hours || !activity_type) {
       return NextResponse.json({ error: "Missing required fields" }, { status: 400 })
     }
 
@@ -30,6 +30,7 @@ export async function PUT(request: NextRequest, { params }: { params: { id: stri
         price: Number.parseFloat(price),
         durationHours: Number.parseInt(duration_hours),
         equipmentIncluded: Boolean(equipment_included),
+        activityType: activity_type,
         imageUrl: image_url || null,
         isActive: is_active !== undefined ? is_active : true,
       },

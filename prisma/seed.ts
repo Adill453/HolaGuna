@@ -183,6 +183,7 @@ async function main() {
         price: 50.0,
         durationHours: 2,
         equipmentIncluded: true,
+        activityType: "STANDUP_PADDLE",
         imageUrl: "/images/standuppaddle-1.jpg",
       },
       {
@@ -191,6 +192,7 @@ async function main() {
         price: 150.0,
         durationHours: 2,
         equipmentIncluded: true,
+        activityType: "KITESURFING",
         imageUrl: "/images/kitesurfing-4.jpg",
       },
       {
@@ -199,6 +201,7 @@ async function main() {
         price: 80.0,
         durationHours: 1,
         equipmentIncluded: true,
+        activityType: "BUGGY",
         imageUrl: "/images/buggy-4.jpg",
       },
       {
@@ -207,6 +210,7 @@ async function main() {
         price: 60.0,
         durationHours: 2,
         equipmentIncluded: true,
+        activityType: "LAND_BOARD",
         imageUrl: "/images/landboard-3.jpg",
       },
     ],
