@@ -34,10 +34,10 @@ interface BookingModalProps {
   packages?: Package[]
 }
 
-export function BookingModal({ 
-  courseId, 
-  courseName, 
-  categoryId, 
+export function BookingModal({
+  courseId,
+  courseName,
+  categoryId,
   categoryName,
   packages = []
 }: BookingModalProps) {
@@ -53,7 +53,7 @@ export function BookingModal({
     packageId: packages.length > 0 ? packages[0].id : undefined,
   })
   const [loading, setLoading] = useState(false)
-  
+
   const selectedPackage = packages.find((pkg) => pkg.id === formData.packageId)
   const displayName = categoryName || courseName || "Course"
 
@@ -142,9 +142,9 @@ export function BookingModal({
                     <SelectValue placeholder="Choisir un package" />
                   </SelectTrigger>
                   <SelectContent>
-                    {packages.filter((pkg) => pkg.isActive).map((pkg) => (
+                    {packages.filter((pkg) => pkg.isActive).sort((a, b) => a.id - b.id).map((pkg) => (
                       <SelectItem key={pkg.id} value={pkg.id.toString()}>
-                        {pkg.hours}H - €{pkg.price}
+                        {pkg.description} {pkg.hours}H - €{pkg.price}
                       </SelectItem>
                     ))}
                   </SelectContent>

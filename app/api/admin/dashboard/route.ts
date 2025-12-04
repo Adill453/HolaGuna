@@ -36,8 +36,8 @@ export async function GET(request: NextRequest) {
       todayBookings,
       totalRevenue,
     ] = await Promise.all([
-      prisma.course.count(),
-      prisma.course.count({ where: { isActive: true } }),
+      prisma.courseCategory.count(),
+      prisma.courseCategory.count(),
       prisma.activity.count(),
       prisma.gallery.count(),
       prisma.gallery.count({ where: { isFeatured: true } }),

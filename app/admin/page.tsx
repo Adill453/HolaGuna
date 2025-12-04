@@ -74,9 +74,9 @@ export default function AdminDashboard() {
       color: "text-emerald-600",
     },
     {
-      title: "Courses",
+      title: "Total Catégories",
       value: stats?.totalCourses || 0,
-      description: `${stats?.activeCourses || 0} actifs`,
+      description: "Catégories disponibles",
       icon: BookOpen,
       color: "text-purple-600",
     },
