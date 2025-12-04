@@ -6,7 +6,6 @@ import { useState, useEffect } from "react"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
-import { Textarea } from "@/components/ui/textarea"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Checkbox } from "@/components/ui/checkbox"
 import { AspectRatio } from "@/components/ui/aspect-ratio"
@@ -20,12 +19,11 @@ import {
 } from "@/components/ui/dialog"
 import { Skeleton } from "@/components/ui/skeleton"
 import { useToast } from "@/hooks/use-toast"
-import { Plus, Edit, Trash2, Star, Download, Upload, X } from "lucide-react"
+import { Edit, Trash2, Star, Download, Upload, X } from "lucide-react"
 
 interface GalleryItem {
   id: number
   title: string
-  description: string | null
   imageUrl: string
   category: string
   isFeatured: boolean
@@ -41,7 +39,6 @@ export default function AdminGalleryPage() {
 
   const [formData, setFormData] = useState({
     title: "",
-    description: "",
     imageUrl: "",
     category: "",
     isFeatured: false,
@@ -56,38 +53,6 @@ export default function AdminGalleryPage() {
     fetchGalleryItems()
   }, [])
 
-  const handleFileSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0]
-    if (file) {
-      // Validate file type
-      const allowedTypes = ["image/jpeg", "image/jpg", "image/png", "image/webp"]
-      if (!allowedTypes.includes(file.type)) {
-        toast({
-          title: "Invalid file type",
-          description: "Please select a JPEG, PNG, or WebP image file.",
-          variant: "destructive",
-        })
-        return
-      }
-
-      // Validate file size (max 10MB)
-      const maxSize = 10 * 1024 * 1024 // 10MB
-      if (file.size > maxSize) {
-        toast({
-          title: "File too large",
-          description: "Please select an image smaller than 10MB.",
-          variant: "destructive",
-        })
-        return
-      }
-
-      setSelectedFile(file)
-      
-      // Create preview URL
-      const previewUrl = URL.createObjectURL(file)
-      setImagePreview(previewUrl)
-    }
-  }
 
   const removeSelectedFile = () => {
     if (imagePreview) {
@@ -221,9 +186,9 @@ export default function AdminGalleryPage() {
     // Map database category back to frontend category
     const categoryMap: { [key: string]: string } = {
       'KITESURFING': 'kitesurfing',
-      'KITE_BUGGY': 'kite-buggy',
-      'KITE_LANDBOARD': 'kite-landboard',
-      'PADDLEBOARD': 'paddleboard',
+      'BUGGY': 'buggy',
+      'LAND_BOARD': 'land board',
+      'STANDUP_PADDLE': 'standup paddle',
       'CLIENTS': 'clients'
     }
 
@@ -232,7 +197,6 @@ export default function AdminGalleryPage() {
     setEditingItem(item)
     setFormData({
       title: item.title,
-      description: item.description || "",
       imageUrl: item.imageUrl,
       category: frontendCategory,
       isFeatured: item.isFeatured,
@@ -269,7 +233,6 @@ export default function AdminGalleryPage() {
   const resetForm = () => {
     setFormData({
       title: "",
-      description: "",
       imageUrl: "",
       category: "",
       isFeatured: false,
@@ -288,7 +251,7 @@ export default function AdminGalleryPage() {
       <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4">
         <div>
           <h1 className="text-2xl sm:text-3xl font-bold">Manage Gallery</h1>
-          <p className="text-muted-foreground text-sm sm:text-base">Upload and manage activity photos</p>
+          <p className="text-muted-foreground text-sm sm:text-base">manage activity photos</p>
         </div>
         <div className="flex flex-col sm:flex-row gap-2">
           <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
@@ -371,16 +334,7 @@ export default function AdminGalleryPage() {
                   )}
                 </div>
               </div>
-              <div>
-                <label className="text-sm font-medium">Description (optional)</label>
-                <Textarea
-                  value={formData.description}
-                  onChange={(e) => setFormData({ ...formData, description: e.target.value })}
-                  placeholder="Image description..."
-                  rows={2}
-                  className="resize-none"
-                />
-              </div>
+              
               <div className="flex items-center space-x-2">
                 <Checkbox
                   id="featured"
@@ -449,9 +403,7 @@ export default function AdminGalleryPage() {
                       <div>
                         <CardTitle className="text-lg mb-1 truncate" title={item.title}>{item.title}</CardTitle>
                         <CardDescription className="mb-2 capitalize truncate">{item.category.replace("-", " ")}</CardDescription>
-                        {item.description && (
-                          <p className="text-sm text-muted-foreground mb-3 line-clamp-2">{item.description}</p>
-                        )}
+                        
                       </div>
                       <div className="flex flex-col gap-2">
                         <Button 
