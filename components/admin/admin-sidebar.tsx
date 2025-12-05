@@ -101,7 +101,7 @@ export function AdminSidebar() {
         </nav>
 
         <div className="p-4 border-t">
-          <div className="mb-4">
+          <div className="mb-4 pl-2">
             <p className="text-sm font-medium">Admin User</p>
             <p className="text-xs text-muted-foreground">admin@kitedakhla.com</p>
           </div>

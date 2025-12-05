@@ -133,9 +133,9 @@ export default function RegisterPage() {
     <div className="min-h-screen bg-gradient-to-br from-primary/10 via-background to-secondary/10 flex items-center justify-center p-4">
       <Card className="w-full max-w-md">
         <CardHeader className="text-center">
-          <div className="flex items-center justify-center mb-4">
-            <Wind className="h-8 w-8 text-primary mr-2" />
-            <span className="text-2xl font-bold">Ola Y Lagona</span>
+          <div className="flex items-center justify-center m-2 space-x-2">
+            <img src="/logo.png" alt="Ola Y Lagona" className="h-9 w-9" />
+            <span className="text-2xl font-bold text-foreground">Ola Y Lagona</span>
           </div>
           <CardTitle>Create Account</CardTitle>
           <CardDescription>Join us for amazing kite sports adventures</CardDescription>
