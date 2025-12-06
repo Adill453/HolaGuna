@@ -30,7 +30,7 @@ async function main() {
     data: {
       name: "kitesurfing Group",
       description: "Learn kitesurfing in a group setting with up to 8 participants. Perfect for learning with others and making new friends.",
-      imageUrl: "/images/kitesurfing-2.jpg",
+      imageUrl: "/images/kitesurfing-4.jpg",
       packages: {
         create: [
           { hours: 2, price: 70.0, isActive: true },
@@ -79,7 +79,7 @@ async function main() {
           { hours: 8, price: 575.0, isActive: true },
           { hours: 10, price: 680.0, isActive: true },
           { hours: 12, price: 780.0, isActive: true },
-          { hours: 1, price: 60.0, isActive: true ,description: "EXTRA HOUR" },
+          { hours: 1, price: 60.0, isActive: true, description: "EXTRA HOUR" },
         ],
       },
     },
@@ -93,14 +93,14 @@ async function main() {
       imageUrl: "/images/buggy-2.jpg",
       packages: {
         create: [
-          { 
-            hours: 3, 
-            price: 140.0, 
+          {
+            hours: 3,
+            price: 140.0,
             isActive: true,
           },
-          { 
-            hours: 6, 
-            price: 260.0, 
+          {
+            hours: 6,
+            price: 260.0,
             isActive: true,
           },
         ],
@@ -116,14 +116,14 @@ async function main() {
       imageUrl: "/images/buggy-2.jpg",
       packages: {
         create: [
-          { 
-            hours: 1.5, 
-            price: 95.0, 
+          {
+            hours: 1.5,
+            price: 95.0,
             isActive: true,
           },
-          { 
-            hours: 3, 
-            price: 180.0, 
+          {
+            hours: 3,
+            price: 180.0,
             isActive: true,
           },
         ],
@@ -139,14 +139,14 @@ async function main() {
       imageUrl: "/images/buggy-2.jpg",
       packages: {
         create: [
-          { 
-            hours: 1, 
-            price: 70.0, 
+          {
+            hours: 1,
+            price: 70.0,
             isActive: true,
           },
-          { 
-            hours: 2, 
-            price: 130.0, 
+          {
+            hours: 2,
+            price: 130.0,
             isActive: true,
           },
         ],
@@ -162,9 +162,9 @@ async function main() {
       imageUrl: "/images/landboard-3.jpg",
       packages: {
         create: [
-          { 
-            hours: 2, 
-            price: 80.0, 
+          {
+            hours: 2,
+            price: 80.0,
             isActive: true,
           },
         ],
@@ -172,7 +172,7 @@ async function main() {
     },
   })
 
-  
+
 
   // Create sample activities
   await prisma.activity.createMany({
@@ -183,7 +183,6 @@ async function main() {
         price: 50.0,
         durationHours: 2,
         equipmentIncluded: true,
-        activityType: "STANDUP_PADDLE",
         imageUrl: "/images/standuppaddle-1.jpg",
       },
       {
@@ -192,7 +191,6 @@ async function main() {
         price: 150.0,
         durationHours: 2,
         equipmentIncluded: true,
-        activityType: "KITESURFING",
         imageUrl: "/images/kitesurfing-4.jpg",
       },
       {
@@ -201,7 +199,6 @@ async function main() {
         price: 80.0,
         durationHours: 1,
         equipmentIncluded: true,
-        activityType: "BUGGY",
         imageUrl: "/images/buggy-4.jpg",
       },
       {
@@ -210,7 +207,6 @@ async function main() {
         price: 60.0,
         durationHours: 2,
         equipmentIncluded: true,
-        activityType: "LAND_BOARD",
         imageUrl: "/images/landboard-3.jpg",
       },
     ],
@@ -504,7 +500,7 @@ async function main() {
         category: "LAND_BOARD",
         isFeatured: false,
       },
-      
+
       {
         title: "Peaceful stand up paddleboarding",
         imageUrl: "/images/standuppaddle-1.jpg",
