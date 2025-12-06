@@ -4,7 +4,7 @@
 
 
 
-## Installation test last design
+## Installation last design
 
 
 1. Clone the repository:
