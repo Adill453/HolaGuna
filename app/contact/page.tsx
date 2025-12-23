@@ -233,25 +233,25 @@ export default function ContactPage() {
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <div className="space-y-3">
-                    <div className="flex items-center gap-2">
+                    {/* <div className="flex items-center gap-2">
                       <div className="w-2 h-2 bg-primary rounded-full"></div>
                       <span className="text-sm">IKO certified instructors</span>
+                    </div> */}
+                    <div className="flex items-center gap-2">
+                      {/* <div className="w-2 h-2 bg-primary rounded-full"></div> */}
+                      <span className="text-sm">The lesson includes full equipment and a walkie-talkie for easy communication</span>
                     </div>
                     <div className="flex items-center gap-2">
-                      <div className="w-2 h-2 bg-primary rounded-full"></div>
-                      <span className="text-sm">Perfect wind conditions year-round</span>
+                      {/* <div className="w-2 h-2 bg-primary rounded-full"></div> */}
+                      <span className="text-sm">We have three teaching spots: White Dune, Speed Spot, and the Lagoon.</span>
                     </div>
                     <div className="flex items-center gap-2">
-                      <div className="w-2 h-2 bg-primary rounded-full"></div>
-                      <span className="text-sm">Small group sizes for personalized attention</span>
+                      {/* <div className="w-2 h-2 bg-primary rounded-full"></div> */}
+                      <span className="text-sm">These spots are not crowded and offer very flat water, making them perfect for learning.</span>
                     </div>
                     <div className="flex items-center gap-2">
-                      <div className="w-2 h-2 bg-primary rounded-full"></div>
-                      <span className="text-sm">Top-quality equipment and safety gear</span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <div className="w-2 h-2 bg-primary rounded-full"></div>
-                      <span className="text-sm">Stunning lagoon and ocean locations</span>
+                      {/* <div className="w-2 h-2 bg-primary rounded-full"></div> */}
+                      <span className="text-sm">They are ideal for all levels — from complete beginners to advanced riders — and make every lesson interesting and enjoyable.”</span>
                     </div>
                   </div>
                 </CardContent>
