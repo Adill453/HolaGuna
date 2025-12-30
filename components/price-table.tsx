@@ -9,6 +9,7 @@ import {
   TableRow,
 } from "@/components/ui/table"
 import { Badge } from "@/components/ui/badge"
+import { useCurrency } from "@/contexts/currency-context"
 
 interface Package {
   id: number
@@ -23,6 +24,7 @@ interface PriceTableProps {
 }
 
 export function PriceTable({ packages }: PriceTableProps) {
+  const { formatPriceWithSymbol } = useCurrency()
   const activePackages = packages.filter((pkg) => pkg.isActive)
 
   if (activePackages.length === 0) {
@@ -56,7 +58,7 @@ export function PriceTable({ packages }: PriceTableProps) {
               )}
               <TableCell className="text-right">
                 <Badge variant="secondary" className="text-base font-semibold">
-                  €{pkg.price}
+                  {formatPriceWithSymbol(pkg.price)}
                 </Badge>
               </TableCell>
             </TableRow>

@@ -1,9 +1,10 @@
 "use client"
 
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
 import { PriceTable } from "@/components/price-table"
 import { BookingModal } from "@/components/booking-modal"
+import { useCurrency } from "@/contexts/currency-context"
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 
 interface Package {
   id: number
@@ -26,10 +27,8 @@ interface CourseCategoryCardProps {
 }
 
 export function CourseCategoryCard({ category }: CourseCategoryCardProps) {
+  const { currency, setCurrency } = useCurrency()
   const activePackages = category.packages.filter((pkg) => pkg.isActive)
-  const cheapestPackage = activePackages.length > 0
-    ? activePackages.reduce((min, pkg) => (pkg.price < min.price ? pkg : min), activePackages[0])
-    : null
 
   return (
 
@@ -44,14 +43,19 @@ export function CourseCategoryCard({ category }: CourseCategoryCardProps) {
       {/* Blur Overlay */}
       <div className="absolute inset-0 bg-black/50"></div>
       <br />
-      {/* Top Badge */}
-      {cheapestPackage && (
-        <div className="absolute top-4 right-4 z-20">
-          <Badge variant="secondary" className="bg-background/90 text-foreground">
-            From €{cheapestPackage.price}
-          </Badge>
-        </div>
-      )}
+      {/* Currency Selector */}
+      <div className="absolute top-4 right-4 z-20">
+        <Select value={currency} onValueChange={(value) => setCurrency(value as "EUR" | "USD" | "MAD")}>
+          <SelectTrigger className="w-[90px] h-8 text-xs justify-center bg-background/90 text-foreground border-background/50">
+            <SelectValue />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="EUR">EUR (€)</SelectItem>
+            <SelectItem value="USD">USD ($)</SelectItem>
+            <SelectItem value="MAD">MAD</SelectItem>
+          </SelectContent>
+        </Select>
+      </div>
 
       {/* Content */}
       <div className="relative z-10">

@@ -6,6 +6,7 @@ import { Analytics } from "@vercel/analytics/next"
 import { AuthProvider } from "@/hooks/use-auth"
 import { ThemeProvider } from "@/components/theme-provider"
 import { Toaster } from "@/components/ui/toaster"
+import { CurrencyProvider } from "@/contexts/currency-context"
 
 import "./globals.css"
 
@@ -34,8 +35,10 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <AuthProvider>
-            {children}
-            <Toaster />
+            <CurrencyProvider>
+              {children}
+              <Toaster />
+            </CurrencyProvider>
           </AuthProvider>
         </ThemeProvider>
         <Analytics />

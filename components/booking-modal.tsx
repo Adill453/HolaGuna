@@ -8,6 +8,7 @@ import { Label } from "@/components/ui/label"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { useAuth } from "@/hooks/use-auth"
 import { useToast } from "@/hooks/use-toast"
+import { useCurrency } from "@/contexts/currency-context"
 
 const timeSlots = [
   "09:00",
@@ -43,6 +44,7 @@ export function BookingModal({
 }: BookingModalProps) {
   const { user } = useAuth()
   const { toast } = useToast()
+  const { formatPriceWithSymbol } = useCurrency()
   const [isOpen, setIsOpen] = useState(false)
   const [formData, setFormData] = useState({
     name: user?.name || "",
@@ -144,7 +146,7 @@ export function BookingModal({
                   <SelectContent>
                     {packages.filter((pkg) => pkg.isActive).sort((a, b) => a.id - b.id).map((pkg) => (
                       <SelectItem key={pkg.id} value={pkg.id.toString()}>
-                        {pkg.description} {pkg.hours}H - €{pkg.price}
+                        {pkg.description} {pkg.hours}H - {formatPriceWithSymbol(pkg.price)}
                       </SelectItem>
                     ))}
                   </SelectContent>
@@ -155,7 +157,7 @@ export function BookingModal({
               <div className="grid grid-cols-4 items-center gap-4">
                 <Label className="text-right">Prix total</Label>
                 <div className="col-span-3 text-lg font-semibold text-primary">
-                  €{selectedPackage.price * (formData.participants || 1)}
+                  {formatPriceWithSymbol(selectedPackage.price * (formData.participants || 1))}
                 </div>
               </div>
             )}
