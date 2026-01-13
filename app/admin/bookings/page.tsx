@@ -92,6 +92,26 @@ const STATUS_CONFIG = {
   DELETED: { label: "Supprimée", color: "bg-gray-100 text-gray-800", icon: XCircle },
 } as const
 
+// Helper function to determine booking type
+function getBookingType(booking: Booking): string {
+  const isRental = !booking.course && !booking.package && !booking.activity && 
+                    booking.notes && booking.notes.toLowerCase().includes("location")
+  if (isRental) {
+    return "Location"
+  }
+  return (booking.course || booking.package) ? "Cours" : "Activité"
+}
+
+// Helper function to get booking name
+function getBookingName(booking: Booking): string {
+  const isRental = !booking.course && !booking.package && !booking.activity && 
+                    booking.notes && booking.notes.toLowerCase().includes("location")
+  if (isRental) {
+    return "Équipement Kitesurfing"
+  }
+  return booking.course?.name || booking.package?.category.name || booking.activity?.name || "N/A"
+}
+
 export default function AdminBookingsPage() {
   const [bookings, setBookings] = useState<Booking[]>([])
   const [loading, setLoading] = useState(true)
@@ -196,8 +216,8 @@ export default function AdminBookingsPage() {
         booking.user.name,
         booking.user.email,
         booking.user.phone || "",
-        (booking.course || booking.package) ? "Cours" : "Activité",
-        booking.course?.name || booking.package?.category.name || booking.activity?.name || "",
+        getBookingType(booking),
+        getBookingName(booking),
         format(new Date(booking.bookingDate), "dd/MM/yyyy", { locale: fr }),
         booking.bookingTime,
         booking.participants,
@@ -384,10 +404,10 @@ export default function AdminBookingsPage() {
                         <TableCell>
                           <div>
                             <div className="font-medium">
-                              {(booking.course || booking.package) ? "Cours" : "Activité"}
+                              {getBookingType(booking)}
                             </div>
                             <div className="text-sm text-muted-foreground">
-                              {booking.course?.name || booking.package?.category.name || booking.activity?.name}
+                              {getBookingName(booking)}
                             </div>
                             {booking.course?.courseType && (
                               <div className="text-xs text-muted-foreground mt-1">
@@ -402,6 +422,12 @@ export default function AdminBookingsPage() {
                             {booking.activity?.activityType && (
                               <div className="text-xs text-muted-foreground mt-1">
                                 Type: {booking.activity.activityType}
+                              </div>
+                            )}
+                            {!booking.course && !booking.package && !booking.activity && 
+                             booking.notes && booking.notes.toLowerCase().includes("location") && (
+                              <div className="text-xs text-muted-foreground mt-1">
+                                {booking.notes.split(".")[0]}
                               </div>
                             )}
                           </div>
@@ -522,8 +548,12 @@ export default function AdminBookingsPage() {
                 <div>
                   <h4 className="font-medium mb-2">Réservation</h4>
                   <div className="space-y-1 text-sm">
-                    <div><strong>Type:</strong> {(selectedBooking.course || selectedBooking.package) ? "Cours" : "Activité"}</div>
-                    <div><strong>Nom:</strong> {selectedBooking.course?.name || selectedBooking.package?.category.name || selectedBooking.activity?.name}</div>
+                    <div><strong>Type:</strong> {getBookingType(selectedBooking)}</div>
+                    <div><strong>Nom:</strong> {getBookingName(selectedBooking)}</div>
+                    {!selectedBooking.course && !selectedBooking.package && !selectedBooking.activity && 
+                     selectedBooking.notes && selectedBooking.notes.toLowerCase().includes("location") && (
+                      <div><strong>Détails:</strong> {selectedBooking.notes}</div>
+                    )}
                     {selectedBooking.course?.courseType && (
                       <div><strong>Type de cours:</strong> {selectedBooking.course.courseType}</div>
                     )}

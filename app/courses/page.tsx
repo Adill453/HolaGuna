@@ -5,6 +5,7 @@ import { Navigation } from "@/components/navigation"
 import { Skeleton } from "@/components/ui/skeleton"
 import { BookOpen } from "lucide-react"
 import { CourseCategoryCard } from "@/components/course-category-card"
+import { RentalCart } from "@/components/rental-cart"
 import { Card, CardContent, CardHeader } from "@/components/ui/card"
 import { Award, Users, Clock } from "lucide-react"
 
@@ -114,6 +115,13 @@ export default function CoursesPage() {
               ))}
             </div>
           )}
+        </div>
+      </section>
+
+      {/* Rental Cart Section */}
+      <section className="py-8">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <RentalCart />
         </div>
       </section>
 
