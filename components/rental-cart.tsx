@@ -1,5 +1,7 @@
 "use client"
 
+import { useEffect, useState } from "react"
+
 import {
   Table,
   TableBody,
@@ -10,74 +12,130 @@ import {
 } from "@/components/ui/table"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { useCurrency } from "@/contexts/currency-context"
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { ShoppingCart } from "lucide-react"
 import { RentalBookingModal } from "@/components/rental-booking-modal"
 
 interface RentalPrice {
-  days: number | string
-  fullGear: number
-  insurance: number
+  id: number
+  days: number
+  isExtraDay: boolean
+  fullGearPrice: number
+  insurancePrice: number
 }
 
-const rentalPrices: RentalPrice[] = [
-  { days: 1, fullGear: 85, insurance: 10 },
-  { days: 2, fullGear: 160, insurance: 17 },
-  { days: 3, fullGear: 220, insurance: 20 },
-  { days: 4, fullGear: 280, insurance: 28 },
-  { days: 5, fullGear: 380, insurance: 35 },
-  { days: 6, fullGear: 380, insurance: 45 },
-  { days: 7, fullGear: 450, insurance: 50 },
-  { days: "Extra Day", fullGear: 50, insurance: 5 },
+const FALLBACK_PRICES: RentalPrice[] = [
+  { id: 1, days: 1, isExtraDay: false, fullGearPrice: 85, insurancePrice: 10 },
+  { id: 2, days: 2, isExtraDay: false, fullGearPrice: 160, insurancePrice: 17 },
+  { id: 3, days: 3, isExtraDay: false, fullGearPrice: 220, insurancePrice: 20 },
+  { id: 4, days: 4, isExtraDay: false, fullGearPrice: 280, insurancePrice: 28 },
+  { id: 5, days: 5, isExtraDay: false, fullGearPrice: 380, insurancePrice: 35 },
+  { id: 6, days: 6, isExtraDay: false, fullGearPrice: 380, insurancePrice: 45 },
+  { id: 7, days: 7, isExtraDay: false, fullGearPrice: 450, insurancePrice: 50 },
+  { id: 8, days: 1, isExtraDay: true, fullGearPrice: 50, insurancePrice: 5 },
 ]
 
-const rentalDescription = "To rent kitesurfing equipment, riders must be independent and have at least Level 3 or be able to improve their skills. Riders are responsible for taking care of the gear and using it carefully. If you are not sure about your level or have any questions, don't hesitate to ask — we're happy to help or recommend lessons."
 
 export function RentalCart() {
-  const { formatPriceWithSymbol } = useCurrency()
+  const { currency, setCurrency, formatPriceWithSymbol } = useCurrency()
+  const [prices, setPrices] = useState<RentalPrice[]>(FALLBACK_PRICES)
+
+  useEffect(() => {
+    const fetchPricing = async () => {
+      try {
+        const response = await fetch("/api/rental/pricing")
+        if (!response.ok) return
+        const data = await response.json()
+        if (Array.isArray(data.pricing) && data.pricing.length > 0) {
+          setPrices(
+            data.pricing.map((p: any) => ({
+              id: p.id,
+              days: p.days,
+              isExtraDay: p.isExtraDay,
+              fullGearPrice: p.fullGearPrice,
+              insurancePrice: p.insurancePrice,
+            })),
+          )
+        }
+      } catch {
+        // keep fallback prices
+      }
+    }
+
+    fetchPricing()
+  }, [])
 
   return (
-    <Card className="w-full">
-      <CardHeader>
-        <CardTitle className="flex items-center gap-2">
-          <ShoppingCart className="h-5 w-5 text-primary" />
-          Kite Surfing Rental
-        </CardTitle>
-        <CardDescription className="text-sm text-muted-foreground">
-          {rentalDescription}
-        </CardDescription>
-      </CardHeader>
-      <CardContent>
-        <div className="rounded-md border">
-          <Table>
-            <TableHeader>
-              <TableRow>
-                <TableHead className="w-[120px]">Days</TableHead>
-                <TableHead className="text-right">Full Gear</TableHead>
-                <TableHead className="text-right">Insurance</TableHead>
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              {rentalPrices.map((rental, index) => (
-                <TableRow key={index}>
-                  <TableCell className="font-medium">
-                    {typeof rental.days === "number" ? `${rental.days} Day${rental.days > 1 ? "s" : ""}` : rental.days}
-                  </TableCell>
-                  <TableCell className="text-right font-semibold">
-                    {formatPriceWithSymbol(rental.fullGear)}
-                  </TableCell>
-                  <TableCell className="text-right font-semibold">
-                    {formatPriceWithSymbol(rental.insurance)}
-                  </TableCell>
+    <Card
+      className="group hover:shadow-lg transition-shadow relative overflow-hidden rounded-lg"
+      style={{
+        backgroundImage: "url(/images/kitesurfing-22.jpg)",
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+      }}
+    >
+      
+      <div className="absolute inset-0 bg-black/50" />
+      <br />
+
+      {/* Currency Selector */}
+      <div className="absolute top-4 right-4 z-20">
+        <Select value={currency} onValueChange={(value) => setCurrency(value as "EUR" | "USD" | "MAD")}>
+          <SelectTrigger className="w-[90px] h-8 text-xs justify-center bg-background/90 text-foreground border-background/50">
+            <SelectValue />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="EUR">EUR (€)</SelectItem>
+            <SelectItem value="USD">USD ($)</SelectItem>
+            <SelectItem value="MAD">MAD</SelectItem>
+          </SelectContent>
+        </Select>
+      </div>
+
+      {/* Content */}
+      <div className="relative z-10">
+        <CardHeader>
+          <CardTitle className="text-2xl text-white drop-shadow-lg">
+            Kite Surfing Rental
+          </CardTitle>
+        </CardHeader>
+
+        <CardContent className="space-y-4">
+          <div className="rounded-md text-white">
+            <Table>
+              <TableHeader>
+                <TableRow>
+                  <TableHead className="w-[100px]">Days</TableHead>
+                  <TableHead className="text-right">Full Gear</TableHead>
+                  <TableHead className="text-right">Insurance</TableHead>
                 </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </div>
-        <div className="flex justify-end pt-4">
-          <RentalBookingModal />
-        </div>
-      </CardContent>
+              </TableHeader>
+              <TableBody>
+                {prices.map((rental) => (
+                  <TableRow key={rental.id}>
+                    <TableCell className="font-medium">
+                      {rental.isExtraDay ? "Extra Day" : `${rental.days} Day${rental.days > 1 ? "s" : ""}`}
+                    </TableCell>
+                    <TableCell className="text-right font-semibold">
+                      {formatPriceWithSymbol(rental.fullGearPrice)}
+                    </TableCell>
+                    <TableCell className="text-right font-semibold">
+                      {formatPriceWithSymbol(rental.insurancePrice)}
+                    </TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </div>
+
+          <div className="flex justify-end pt-2">
+            <RentalBookingModal />
+          </div>
+        </CardContent>
+      </div>
     </Card>
   )
 }
+
+
 

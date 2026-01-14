@@ -40,6 +40,9 @@ export function Navigation() {
               <Link href="/courses" className="text-foreground hover:text-primary transition-colors">
                 Courses
               </Link>
+              <Link href="/rental" className="text-foreground hover:text-primary transition-colors">
+                Rental
+              </Link>
               <Link href="/activities" className="text-foreground hover:text-primary transition-colors">
                 Activities
               </Link>
@@ -132,6 +135,13 @@ export function Navigation() {
             onClick={closeSidebar}
           >
             Courses
+          </Link>
+          <Link
+            href="/rental"
+            className="block px-3 py-2 rounded-md text-foreground hover:bg-accent hover:text-accent-foreground transition-colors"
+            onClick={closeSidebar}
+          >
+            Rental
           </Link>
           <Link
             href="/activities"

@@ -5,8 +5,9 @@ import { Navigation } from "@/components/navigation"
 import { Skeleton } from "@/components/ui/skeleton"
 import { BookOpen } from "lucide-react"
 import { CourseCategoryCard } from "@/components/course-category-card"
-import { RentalCart } from "@/components/rental-cart"
-import { Card, CardContent, CardHeader } from "@/components/ui/card"
+import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
+import Link from "next/link"
+import { Button } from "@/components/ui/button"
 import { Award, Users, Clock } from "lucide-react"
 
 interface Package {
@@ -72,7 +73,7 @@ export default function CoursesPage() {
       <section className="py-4">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {loading ? (
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div className="grid md:grid-cols-2 lg-cols-3 gap-8">
               {[...Array(6)].map((_, index) => (
                 <Card key={index}>
                   <div className="relative">
@@ -109,19 +110,49 @@ export default function CoursesPage() {
               <p className="text-muted-foreground">Check back soon for new course offerings!</p>
             </div>
           ) : (
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {categories.sort((a, b) => a.id - b.id).map((category) => (
-                <CourseCategoryCard key={category.id} category={category} />
-              ))}
-            </div>
-          )}
-        </div>
-      </section>
+            <>
+              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                {categories.sort((a, b) => a.id - b.id).map((category) => (
+                  <CourseCategoryCard key={category.id} category={category} />
+                ))}
+              </div>
 
-      {/* Rental Cart Section */}
-      <section className="py-8">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <RentalCart />
+              {/* Link to Rental Page */}
+              <div className="mt-6 flex justify-center">
+                <Card className="relative w-full max-w-xl overflow-hidden rounded-2xl border shadow-sm transition-all duration-300 hover:shadow-md">
+
+                  {/* Top accent */}
+                  <div className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-blue-500 to-cyan-400" />
+
+                  <CardHeader className="pt-4 text-center">
+                    <CardTitle className="text-2xl font-bold tracking-tight">
+                      Need to rent equipment?
+                    </CardTitle>
+                  </CardHeader>
+
+                  <CardContent className="text-center">
+                    <p className="mx-auto max-w-md text-muted-foreground leading-relaxed">
+                      Already independent and just need gear? Check our kitesurfing rental prices
+                      and insurance options.
+                    </p>
+                  </CardContent>
+
+                  <CardFooter className="flex justify-center pb-4">
+                    <Link href="/rental">
+                      <Button
+                        size="lg"
+                        className="rounded-full font-semibold transition-transform hover:scale-105"
+                      >
+                        View Rental Options
+                      </Button>
+                    </Link>
+                  </CardFooter>
+
+                </Card>
+              </div>
+                
+            </>
+          )}
         </div>
       </section>
 
