@@ -7,7 +7,7 @@ import WindguruOfficialEmbed from "@/components/WindguruOfficialEmbed";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import Link from "next/link"
-import { Wind, Users, MapPin, Star, Award, Shield, Clock, Phone, Mail, Languages } from "lucide-react"
+import { MessageCircle, Instagram, Users, MapPin, Star, Award, Shield, Clock, Phone, Mail, Languages } from "lucide-react"
 
 interface GalleryItem {
   id: number
@@ -526,8 +526,23 @@ export default function HomePage() {
               <h4 className="font-semibold">Contact Info</h4>
               <div className="space-y-2 text-sm text-muted-foreground">
                 <p>Dakhla: Lagoon, Speed spot, White dune</p>
-                <p>+212 528 93 XX XX</p>
-                <p>info@kitedakhla.com</p>
+                <a
+                  href="https://wa.me/212762767559?text=Hello%20I%20would%20like%20more%20information"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2"
+                >
+                  <MessageCircle />
+                  <span>+212 762 767 559</span>
+                </a>
+                <a
+                  href="https://www.instagram.com/olaylagona"
+                  target="_blank" rel="noopener noreferrer"
+                  className="flex items-center gap-2"
+                >
+                  <Instagram />
+                  <span>Olaylagona</span>
+                </a>
               </div>
             </div>
           </div>
