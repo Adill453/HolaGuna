@@ -26,11 +26,21 @@ export function Navigation() {
       <nav className="bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 sticky top-0 z-50 border-b border-border">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
+
+            {/* Mobile menu button */}
+            <div className="md:hidden">
+              <Button variant="ghost" size="sm" onClick={() => setIsOpen(!isOpen)}>
+                {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+              </Button>
+            </div>
             {/* Logo */}
             <Link href="/" className="flex items-center space-x-2">
-              <img src="/logo.png" alt="Ola Y Lagona" className="h-9 w-9" />
+              <img src="/logo.png" alt="Ola Y Lagona" className="hidden lg:block h-8 w-8" />
               <span className="font-bold text-xl text-foreground">Ola Y Lagona</span>
             </Link>
+            <div className="md:hidden p-2">
+              
+            </div>
 
             {/* Desktop Navigation */}
             <div className="hidden md:flex items-center space-x-8">
@@ -84,12 +94,7 @@ export function Navigation() {
               </div>
             </div>
 
-            {/* Mobile menu button */}
-            <div className="md:hidden">
-              <Button variant="ghost" size="sm" onClick={() => setIsOpen(!isOpen)}>
-                {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-              </Button>
-            </div>
+            
           </div>
         </div>
       </nav>
