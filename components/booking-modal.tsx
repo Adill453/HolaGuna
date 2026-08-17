@@ -153,7 +153,7 @@ export function BookingModal({
                   onValueChange={(value) => setFormData({ ...formData, packageId: parseInt(value, 10) })}
                 >
                   <SelectTrigger className="col-span-3">
-                    <SelectValue placeholder="Choisir un package" />
+                    <SelectValue placeholder="Choisir un package d" />
                   </SelectTrigger>
                   <SelectContent>
                     {packages.filter((pkg) => pkg.isActive).sort((a, b) => a.id - b.id).map((pkg) => (
