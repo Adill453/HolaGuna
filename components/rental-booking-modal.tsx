@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -15,6 +15,7 @@ import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover
 import { CalendarIcon } from "lucide-react"
 import { format } from "date-fns"
 import { cn } from "@/lib/utils"
+import { useLanguage } from "@/contexts/language-context"
 
 interface RentalPrice {
   days: number | string
@@ -33,21 +34,40 @@ const rentalPrices: RentalPrice[] = [
   { days: "Extra Day", fullGear: 50, insurance: 5 },
 ]
 
-export function RentalBookingModal() {
+interface RentalBookingModalProps {
+  initialDays?: number
+  includeInsurance?: boolean
+  triggerLabel?: string
+}
+
+export function RentalBookingModal({
+  initialDays = 1,
+  includeInsurance = true,
+  triggerLabel,
+}: RentalBookingModalProps) {
   const { user } = useAuth()
   const { toast } = useToast()
   const { formatPriceWithSymbol } = useCurrency()
+  const { t } = useLanguage()
   const [isOpen, setIsOpen] = useState(false)
   const [isDatePickerOpen, setIsDatePickerOpen] = useState(false)
   const [formData, setFormData] = useState({
     name: user?.name || "",
     phone: user?.phone || "",
-    days: 1,
-    includeInsurance: true,
+    days: initialDays,
+    includeInsurance,
     startDate: undefined as Date | undefined,
     message: "",
   })
   const [loading, setLoading] = useState(false)
+
+  useEffect(() => {
+    setFormData((prev) => ({
+      ...prev,
+      days: initialDays,
+      includeInsurance,
+    }))
+  }, [initialDays, includeInsurance])
 
   const selectedRental = rentalPrices.find((r) => 
     typeof r.days === "number" ? r.days === formData.days : false
@@ -137,7 +157,7 @@ export function RentalBookingModal() {
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogTrigger asChild>
-        <Button>Réserver maintenant</Button>
+        <Button className="min-h-11 rounded-full px-6">{triggerLabel || t("bookNow")}</Button>
       </DialogTrigger>
       <DialogContent 
         className="sm:max-w-[500px] max-h-[90vh] overflow-y-auto"

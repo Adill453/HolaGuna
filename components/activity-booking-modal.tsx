@@ -81,7 +81,7 @@ export function ActivityBookingModal({
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogTrigger asChild>
-        <Button>Book Now</Button>
+        <Button className="min-h-11 rounded-full px-6">Book Now</Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px] max-h-[90vh] overflow-y-auto">
         <DialogHeader>

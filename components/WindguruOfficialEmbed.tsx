@@ -1,11 +1,10 @@
-// components/WindguruOfficialEmbed.tsx
-"use client";
+"use client"
 
 type Props = {
-  title?: string;
-  embedUrl: string;
-  height?: number | string;
-};
+  title?: string
+  embedUrl: string
+  height?: number | string
+}
 
 export default function WindguruOfficialEmbed({
   title = "Morocco – Dakhla, WG",
@@ -14,14 +13,15 @@ export default function WindguruOfficialEmbed({
 }: Props) {
   return (
     <div className="w-full">
-      <div className="flex items-center justify-between mb-2">
-        <h2 className="text-lg font-semibold">{title}</h2>
+      <div className="mb-4 flex items-end justify-between gap-4">
+        <div>
+          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-primary">Conditions</p>
+          <h2 className="text-display text-3xl">{title}</h2>
+        </div>
         <span className="text-xs text-muted-foreground">Powered by Windguru</span>
       </div>
-
-      <div className="overflow-x-auto rounded border bg-background">
+      <div className="overflow-x-auto rounded-xl border border-border bg-card">
         <iframe
-          
           src={embedUrl}
           width="100%"
           height={typeof height === "number" ? `${height}px` : height}
@@ -33,5 +33,5 @@ export default function WindguruOfficialEmbed({
         />
       </div>
     </div>
-  );
+  )
 }

@@ -11,7 +11,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { useToast } from "@/hooks/use-toast"
-import { Wind, Eye, EyeOff } from "lucide-react"
+import { Eye, EyeOff } from "lucide-react"
 
 export default function RegisterPage() {
   const [formData, setFormData] = useState({
@@ -130,12 +130,21 @@ export default function RegisterPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-primary/10 via-background to-secondary/10 flex items-center justify-center p-4">
-      <Card className="w-full max-w-md">
+    <div className="grid min-h-screen lg:grid-cols-2">
+      <div className="relative hidden overflow-hidden lg:block">
+        <img src="/images/kitesurfing-4.jpg" alt="" className="h-full w-full object-cover" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
+        <div className="absolute bottom-10 left-10 text-white">
+          <p className="text-xs uppercase tracking-[0.22em] text-white/70">Join the lagoon</p>
+          <p className="text-display mt-2 text-5xl">Ola Y Lagona</p>
+        </div>
+      </div>
+      <div className="flex items-center justify-center bg-background p-6">
+      <Card className="w-full max-w-md border-0 bg-transparent shadow-none">
         <CardHeader className="text-center">
           <div className="flex items-center justify-center m-2 space-x-2">
             <img src="/logo.png" alt="Ola Y Lagona" className="h-9 w-9" />
-            <span className="text-2xl font-bold text-foreground">Ola Y Lagona</span>
+            <span className="text-display text-2xl text-foreground">Ola Y Lagona</span>
           </div>
           <CardTitle>Create Account</CardTitle>
           <CardDescription>Join us for amazing kite sports adventures</CardDescription>
@@ -237,6 +246,7 @@ export default function RegisterPage() {
           </div>
         </CardContent>
       </Card>
+      </div>
     </div>
   )
 }

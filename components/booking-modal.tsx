@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -9,6 +9,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { useAuth } from "@/hooks/use-auth"
 import { useToast } from "@/hooks/use-toast"
 import { useCurrency } from "@/contexts/currency-context"
+import { useLanguage } from "@/contexts/language-context"
 
 const timeSlots = [
   "09:00",
@@ -33,6 +34,8 @@ interface BookingModalProps {
   categoryId?: number
   categoryName?: string
   packages?: Package[]
+  selectedPackageId?: number
+  triggerLabel?: string
 }
 
 export function BookingModal({
@@ -40,11 +43,14 @@ export function BookingModal({
   courseName,
   categoryId,
   categoryName,
-  packages = []
+  packages = [],
+  selectedPackageId,
+  triggerLabel,
 }: BookingModalProps) {
   const { user } = useAuth()
   const { toast } = useToast()
   const { formatPriceWithSymbol } = useCurrency()
+  const { t } = useLanguage()
   const [isOpen, setIsOpen] = useState(false)
   const [formData, setFormData] = useState({
     name: user?.name || "",
@@ -52,8 +58,14 @@ export function BookingModal({
     time: "09:00",
     participants: 1,
     message: "",
-    packageId: packages.length > 0 ? packages[0].id : undefined,
+    packageId: selectedPackageId || (packages.length > 0 ? packages[0].id : undefined),
   })
+
+  useEffect(() => {
+    if (selectedPackageId) {
+      setFormData((prev) => ({ ...prev, packageId: selectedPackageId }))
+    }
+  }, [selectedPackageId])
   const [loading, setLoading] = useState(false)
 
   const selectedPackage = packages.find((pkg) => pkg.id === formData.packageId)
@@ -117,7 +129,7 @@ export function BookingModal({
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogTrigger asChild>
-        <Button>Réserver maintenant</Button>
+        <Button className="min-h-11 rounded-full px-6">{triggerLabel || t("bookNow")}</Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px] max-h-[90vh] overflow-y-auto">
         <DialogHeader>
